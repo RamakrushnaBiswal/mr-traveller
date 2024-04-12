@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel & Tourism Reviews</title>
+    <link rel="icon" href="./images/logo.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #161515;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #000000;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .review {
+            border: 1px solid #494747;
+            padding: 10px;
+            margin-bottom: 10px;
+            color: #ddd;
+
+        }
+
+        #name {
+            background-color: #000000;
+            border: 1px solid #373535;
+            color: #fff;
+        }
+
+        #review {
+            background-color: #000000;
+            border: 1px solid #373535;
+            color: #fff;
+        }
+
+        h2 {
+            color: #fff;
+        }
+
+        .stars {
+            color: #f39c12;
+        }
+
+        #button {
+            background-color: #38037e;
+            border-radius: 50px;
+        }
+
+        #button:hover {
+            background-color: #6d009f;
+        }
+
+        .review-form {
+            margin-top: 20px;
+        }
+
+        .review-form label {
+            font-weight: bold;
+        }
+
+        .review-form input[type="text"],
+        .review-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .star-input {
+            display: none;
+        }
+
+        .star-label {
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .star-label:before {
+            content: "☆";
+            color: #ddd;
+        }
+
+        .star-input:checked~.star-label:before {
+            content: "★";
+            color: #f39c12;
+        }
+
+        .review-form input[type="submit"] {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        #i1,
+        #i2,
+        #i3 {
+            color: #fff;
+        }
+
+        @media screen and (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+
+            .star-label {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Travel & Tourism Reviews</h1>
+    </header>
+
+    <div class="container">
+        <h2>Customer Reviews</h2>
+        <div class="review">
+            <p><strong>John Doe</strong></p>
+            <p><span class="stars">Rating: ★★★★☆</span></p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eget libero vel justo iaculis dictum.</p>
+        </div>
+        <div class="review">
+            <p><strong>Jane Smith</strong></p>
+            <p><span class="stars">Rating: ★★★★★</span></p>
+            <p>Great experience! The tour guides were very knowledgeable, and the scenery was breathtaking.</p>
+        </div>
+
+        <div class="review-form">
+            <h2>Write a Review</h2>
+            <form action="/thankyou" method="get">
+                <label for="name" id="i1">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="rating" id="i2">Rating:</label>
+                <div class="stars">
+                    <input type="checkbox" class="star-input" id="star5" name="rating" value="5">
+                    <label class="star-label" for="star5"></label>
+                    <input type="checkbox" class="star-input" id="star4" name="rating" value="4">
+                    <label class="star-label" for="star4"></label>
+                    <input type="checkbox" class="star-input" id="star3" name="rating" value="3">
+                    <label class="star-label" for="star3"></label>
+                    <input type="checkbox" class="star-input" id="star2" name="rating" value="2">
+                    <label class="star-label" for="star2"></label>
+                    <input type="checkbox" class="star-input" id="star1" name="rating" value="1">
+                    <label class="star-label" for="star1"></label>
+                </div>
+
+                <label for="review" id="i3">Review:</label>
+                <textarea id="review" name="review" rows="4" required></textarea>
+
+                <input type="submit" value="Submit Review" id="button">
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

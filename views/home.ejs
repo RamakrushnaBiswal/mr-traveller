@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr Traveller</title>
+    <link rel="icon" href="./images/logo.png">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Paytone+One&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">  
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body>
+    <div class="banner">
+        <video src="/videos/ps2.mp4" type="video/mp4" autoplay muted loop></video>
+    <div class="content" id="home"> 
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <img src="/images/logo.png" class="logo" alt="Logo" title="FirstFlight Travels" data-aos="fade-right">
+            
+            <ul class="navbar" data-aos="fade-left">
+                <li>
+                    <a href="/">Home</a>
+                    <a href="#locations">Locations</a>
+                    <a href="#package">Packages</a>
+                    <a href="./about">About Us</a>
+                    <a href="./contact">Contact Us</a>
+                </li>
+                <li class="user navbar"><%= user.name || user.username %></li>
+					<li>
+						<form action="/logout" method="post">
+							<button class="logout" type="submit">Sign out</button>
+							<input type="hidden" name="_csrf" value="<%= csrfToken %>">
+						</form>
+					</li>
+				</ul>
+            </ul>
+        </nav>
+ 
+        <div class="title" data-aos="zoom-in-up">
+            <h1>GLOBE GLIDE</h1>
+            <p>Cultivate Inner Peace,Navigation world wonders</p>
+            <a href="./register" class="button">Book a trip Now!</a>
+        </div>
+        </div>
+    </div>
+
+<!-- Services -->
+
+<section class="container">
+    <div class="text">
+        <h2 data-aos="fade-up" data-aos-anchor-placement="top-bottom">We have the best services available for you!</h2>
+    </div>
+    <div class="rowitems" data-aos="fade-up">
+        <a href="./health">
+        <div class="container-box">
+            <div class="container-image">
+                <img src="/images/R.png" alt="Health services">
+            </div>
+            <h4>Medical Services</h4>
+            <p>All type Facilities</p>
+        </div>
+    </a>
+    <a href="https://www.google.co.in/maps/search/near+by+visiting+and+tourist+places">
+        <div class="container-box">
+            <div class="container-image">
+                <img src="/images/R1.png" alt="Health services">
+            </div>
+            <h4>Near By Places</h4>
+            <p>All types Places</p>
+        </div>
+    </a>
+    <a href="./food">
+        <div class="container-box">
+            <div class="container-image">
+                <img src="/images/2a.jpg" alt="Food Services">
+            </div>
+            <h4>Food Services</h4>
+            <p>Catering</p>
+        </div>
+    </a>
+    
+    <a href="./travel">
+        <div class="container-box">
+            <div class="container-image">
+                <img src="/images/3a.jpg" alt="Travel Services">
+            </div>
+            <h4>Travel Services</h4>
+            <p>Pick-up/drop</p>
+        
+        </div>
+    </a>
+        <a href="./hotel">
+        <div class="container-box">
+            <div class="container-image">
+                <img src="/images/4a.jpg" alt="Hotel Services">
+            </div>
+            <h4>Hotel Services</h4>
+            <p>Check-in/out</p>
+        </div>
+    </a>
+    <a href="./offlinemap">
+    <div class="container-box">
+        <div class="container-image">
+                <img src="/images/offline.jpeg" alt="offline map">
+            </div>
+            <h4>Offline Maps</h4>
+            <p>Only for India</p>
+        </div>
+    </a>
+    <a href="./tour">
+        <div class="container-box">
+            <div class="container-image">
+                <img src="/images/th.jpeg" alt="tour">
+            </div>
+            <h4>Tour Guides</h4>
+            <p>Only for India</p>
+        </div>
+    </div>
+</a>
+</section>
+
+
+<!-- Locations -->
+
+<section class="locations" id="locations" >
+    <div class="package-title">
+        <h2 data-aos="fade-up">Locations</h2>
+    </div>
+
+    <div class="location-content" data-aos="fade-up">
+        <a href="./locations#kashmir">
+            <div class="col-content">
+                <img src="/images/l1.jpg" alt="kashmir">
+                <h5>Kashmir</h5>
+                <p>Jammu</p>
+            </div>
+        </a>
+
+        <a href="./locations#Puri">
+            <div class="col-content">
+                <img src="/images/puri.jpg" alt="Puri">
+                <h5>Puri</h5>
+                <p>Odisha</p>
+            </div>
+        </a>
+
+        <a href="./locations#Sridi">
+            <div class="col-content">
+                <img src="/images/Mp.shirdi.jpg" alt="Sridi">
+                <h5>Sridi</h5>
+                <p>Maharastra</p>
+            </div>
+        </a>
+
+        <a href="./locations#Varanasi">
+            <div class="col-content">
+                <img src="/images/up.varanasi (Custom).jpg" alt="Varanasi">
+                <h5>Baranasi</h5>
+                <p>UP</p>
+            </div>
+        </a>
+
+        <a href="./locations#Mumbai" data-aos="fade-up">
+            <div class="col-content">
+                <img src="/images/mumbai1.jpg" alt="Mumbai">
+                <h5>Mumbai</h5>
+                <p>Maharastra</p>
+                </div>
+        </a>
+
+        <a href="./locations#Sikim" data-aos="fade-up">
+            <div class="col-content">
+                <img src="/images/l6.jpg" alt="Sikim">
+                <h5>Sikim</h5>
+                <p>Arunnchal Pradesh</p>
+            </div>
+        </a>
+
+        <a href="./locations#Tirupati" data-aos="fade-up">
+            <div class="col-content">
+                <img src="/images/tirupati.jpg" alt="Tirupati">
+                <h5>Tirupati</h5>
+                <p>Andhra Pradesh</p>
+                
+            </div>
+        </a>
+
+        <a href="./locations#Similipal" data-aos="fade-up">
+            <div class="col-content">
+                <img src="/images/l8.jpg" alt="Similipal">
+                <h5>Similipal</h5>
+                <p>Mayurbhanja</p>
+            </div>
+        </a>
+    </div>
+</section>
+<!-- Packages -->
+
+<section class="package" id="package">
+    <div class="package-title">
+        <h2 data-aos="fade-up">Packages</h2>
+    </div>
+
+    <div class="package-content" data-aos="fade-up">
+        
+        <div class="box">
+            <div class="image">
+                <img src="/images/p1.jpg" alt="">
+                <h3>Rs.9,999/-</h3>
+            </div>
+        
+        <div class="dest-content">
+            <div class="location">
+                <h4>Bronze</h4>
+                <ul class="pac-details">
+                    <li>2 Star Hotel</li>
+                    <li>5 Nights Stay</li>
+                    <li>Free photo Session</li>
+                    <li>Friendly Tour Guide</li>
+                    <li>24/7 Customer Help Center</li>
+                </ul>
+            </div>
+        </div>
+        </div>
+        
+        <div class="box">
+            <div class="image">
+                <img src="/images/p2.jpg" alt="">
+                <h3>Rs.19,999/-</h3>
+            </div>
+        
+        <div class="dest-content">
+            <div class="location">
+                <h4>Silver</h4>
+                <ul class="pac-details">
+                    <li>3 Star Hotel</li>
+                    <li>7 Nights Stay</li>
+                    <li>Free photo Session</li>
+                    <li>Friendly Tour Guide</li>
+                    <li>24/7 Customer Help Center</li>
+                </ul>
+            </div>
+        </div>
+        </div>
+
+        <div class="box">
+            <div class="image">
+                <img src="/images/p3.jpg" alt="">
+                <h3>Rs.29,999/-</h3>
+            </div>
+        
+        <div class="dest-content">
+            <div class="location">
+                <h4>Gold</h4>
+                <ul class="pac-details">
+                    <li>4 Star Hotel</li>
+                    <li>10 Nights Stay</li>
+                    <li>Breakfast and Dinner</li>
+                    <li>Free photo Session</li>
+                    <li>Friendly Tour Guide</li>
+                    <li>24/7 Customer Help Center</li>
+                </ul>
+            </div>
+        </div>
+        </div>
+
+        <div class="box">
+            <div class="image">
+                <img src="/images/p4.jpg" alt="">
+                <h3>Rs.39,999/-</h3>
+            </div>
+        
+        <div class="dest-content">
+            <div class="location">
+                <h4>Platinum</h4>
+                <ul class="pac-details">
+                    <li>5 Star Hotel</li>
+                    <li>14 Nights Stay</li>
+                    <li>Breakfast, Lunch and Dinner</li>
+                    <li>Bornfire</li>
+                    <li>Free photo Session</li>
+                    <li>Friendly Tour Guide</li>
+                    <li>24/7 Customer Help Center</li>
+                </ul>
+            </div>
+        </div>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Newsletter -->
+
+<section class="newsletter">
+    <div class="newstext" data-aos="fade-right">
+        <h2>Newsletter</h2>
+        <p>Subscribe to get offers and latest<br>updates every week!</p>
+    </div>
+
+    <div class="send" data-aos="fade-left">
+        <form action="">
+            <input type="email" name="emailid" placeholder="E-mail" required>
+            <input type="submit" value="Subscribe">
+        </form>
+    </div>
+
+</section>
+
+<!-- Footer -->
+
+<section class="footer">
+    <div class="foot">
+        <div class="footer-content">
+            
+            <div class="footlinks">
+                <h4 data-aos="fade-right">Quick Links</h4>
+                <ul>
+                    <li data-aos="fade-right"><a href="/register">Register</a></li>
+                    <li data-aos="fade-right"><a href="/about">About Us</a></li>
+                    <li data-aos="fade-right"><a href="/contact">Contact Us</a></li>
+                    <li data-aos="fade-right"><a href="/policy">Refund Policy</a></li>
+                    <li data-aos="fade-right"><a href="/review">Reviews</a></li>
+                </ul>
+            </div>
+
+            <div class="footlinks" >
+                <h4 data-aos="fade-left">Connect</h4>
+                <div class="social">
+                    <a href="#" target="_blank"><i class='bx bxl-facebook'></i></a>
+                    <a href="#" target="_blank"><i class='bx bxl-instagram' ></i></a>
+                    <a href="#" target="_blank"><i class='bx bxl-twitter' ></i></a>
+                    <a href="#" target="_blank"><i class='bx bxl-linkedin' ></i></a>
+                    <a href="#" target="_blank"><i class='bx bxl-youtube' ></i></a>
+                    <a href="#" target="_blank"><i class='bx bxl-wordpress' ></i></a>
+                    <a href="#" target="_blank"><i class='bx bxl-github'></i></a> 
+
+                </div>
+                <pre style="color: white;" data-aos="fade-left">
+
+Contact:-7205972033
+Email-rama@giet.edu
+Address-Giet University,Gunpur
+Pin-765022
+                </pre>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="end" data-aos="fade-up"
+    data-aos-anchor-placement="center-bottom">
+        <p>Copyright © 2024 Mr Traveller All Rights Reserved.<br>Website developed by:Mr Devlopers,GIETU</p>
+    </div>
+</section>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({
+        offset:120,
+        duration:1500
+    });
+  </script>
+</body>
+</html>

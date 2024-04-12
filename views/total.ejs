@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Payment Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+</head>
+
+<body class="bg-gray-200">
+    <div class="flex">
+        <!-- Sidebar -->
+        <div class="w-1/5 bg-gray-100 p-4">
+            <div class="space-y-2">
+                <button class="w-full py-2 px-4 bg-gray-300 hover:bg-gray-400 text-left text-black text-lg"
+                    onclick="openCity(event, 'Credit Card')" id="defaultOpen">Credit Card</button>
+                <button class="w-full py-2 px-4 bg-gray-300 hover:bg-gray-400 text-left text-black text-lg"
+                    onclick="openCity(event, 'Debit Card')">Debit Card</button>
+                <button class="w-full py-2 px-4 bg-gray-300 hover:bg-gray-400 text-left text-black text-lg"
+                    onclick="openCity(event, 'Debit Card + ATM Pin')">Debit Card + ATM Pin</button>
+                <button class="w-full py-2 px-4 bg-gray-300 hover:bg-gray-400 text-left text-black text-lg"
+                    onclick="openCity(event, 'Internet Banking')">Internet Banking</button>
+                <button class="w-full py-2 px-4 bg-gray-300 hover:bg-gray-400 text-left text-black text-lg"
+                    onclick="openCity(event, 'Wallet/Cash Card')">Wallet/Cash Card</button>
+                <button class="w-full py-2 px-4 bg-gray-300 hover:bg-gray-400 text-left text-black text-lg"
+                    onclick="openCity(event, 'IMPS')">IMPS</button>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="w-4/5 p-4">
+            <div id="Credit Card" class="tabcontent">
+                <h3 class="text-2xl font-bold">Pay by Credit Card</h3>
+                <p class="text-lg">Card Number</p>
+                <input type="text" name="card" placeholder="Enter Card Number"
+                    class="w-1/2 px-2 py-1 border border-gray-300 rounded" required>
+
+                <p class="text-lg">Expiration Date</p>
+                <input type="month" name="month" placeholder="Month"
+                    class="w-1/2 px-2 py-1 border border-gray-300 rounded" required>
+
+                <p class="text-lg">CVV/CVC</p>
+                <input type="text" name="cvv" class="w-1/2 px-2 py-1 border border-gray-300 rounded" required>
+
+                <p class="text-lg">Card Holder Name</p>
+                <input type="text" name="name" placeholder="Enter Card Holder Name"
+                    class="w-1/2 px-2 py-1 border border-gray-300 rounded" required>
+
+                <a href="./thankyou">
+                    <input type="submit" value="Submit"
+                        class="bg-gray-300 hover:bg-gray-400 text-black py-2 px-4 mt-4 rounded">
+                </a>
+            </div>
+
+            <!-- Other card type sections go here -->
+
+        </div>
+    </div>
+
+    <script>
+        function openCity(evt, mop) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+            document.getElementById(mop).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
+    </script>
+</body>
+
+</html>

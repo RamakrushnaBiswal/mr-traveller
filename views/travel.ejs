@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Vehicle Service</title>
+    <link rel="icon" href="./images/logo.png">
+    <style>
+        img {
+            height: 400px;
+            width: 100px;
+            padding-right: 1000px;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    <div class="container mx-auto p-4">
+        <h1 class="text-3xl font-semibold">Vehicle Service</h1>
+
+        <!-- Vehicle Card 1 -->
+        <div class="bg-white rounded-lg shadow-md p-4 mt-4">
+            <h2 class="text-xl font-semibold">Car</h2>
+            <p>Price per Day: &#x20B9 3000</p>
+            <img src="/images/car.jpg" alt="Car Rental 1" class="w-full mt-2">
+            <h1><b>Conditions for taking rent</b></h1>
+            <hr>
+            <div class="text-cotainer">
+                <ul>
+                    <li>
+                        <p><b>Driver's License:</b> Emphasize the importance of having a valid driver's license that
+                            corresponds to the type of vehicle being operated. Include information about age
+                            requirements and any special endorsements or permits required for certain vehicles.
+                    </li>
+                    <li><b>Traffic Laws:</b> Highlight key traffic laws such as obeying speed limits, stopping at red
+                        lights and stop signs, and yielding the right-of-way. Encourage responsible driving habits to
+                        promote road safety.
+                    </li>
+                    <li><b>Seat Belts:</b> Emphasize the importance of wearing seat belts at all times, regardless of
+                        the position in the vehicle. Mention any specific regulations regarding child safety seats if
+                        applicable.
+                    </li>
+                    <li><b>Alcohol and Drugs:</b> Make it clear that driving under the influence of alcohol or drugs is
+                        strictly prohibited and illegal. Provide information on the legal blood alcohol concentration
+                        (BAC) limits in your area.
+                    </li>
+                    <li><b>Vehicle Range (75km):</b>The distance your vehicle can run on a full tank of fuel or a full
+                        charge (for electric vehicles) varies by vehicle make and model. Refer to your vehicle's manual
+                        or specifications for this information.</li>
+                    <li><b>Number of Persons Can Travel(includeing Child)--</b>less than five(5)
+                    </li>
+                </ul>
+                Need driver<input type="checkbox" name="Driver" id="">
+                </p>
+            </div>
+            <button class="bg-blue-500 text-white px-4 py-2 mt-2 rent-vehicle" data-price="3000">Rent Now</button>
+        </div>
+
+        <!-- Vehicle Card 2 -->
+        <div class="bg-white rounded-lg shadow-md p-4 mt-4">
+            <h2 class="text-xl font-semibold">Scooter Rental</h2>
+            <p>Price per Day: &#x20B9 500</p>
+            <img src="/images/schoter.jpg" alt="Scooter Rental 1" class="w-full mt-2">
+            <ul>
+                <li>
+                    <p><b>Driver's License:</b> Emphasize the importance of having a valid driver's license that
+                        corresponds to the type of vehicle being operated. Include information about age requirements
+                        and any special endorsements or permits required for certain vehicles.
+                </li>
+                <li><b>Traffic Laws:</b> Highlight key traffic laws such as obeying speed limits, stopping at red lights
+                    and stop signs, and yielding the right-of-way. Encourage responsible driving habits to promote road
+                    safety.
+                </li>
+                <li><b>Safety Gear:</b> Always wear appropriate safety gear, which typically includes a DOT-approved
+                    helmet, eye protection (if not equipped with a windshield), gloves, sturdy clothing, and boots that
+                    cover your ankles.
+                </li>
+                <li><b>Alcohol and Drugs:</b> Make it clear that driving under the influence of alcohol or drugs is
+                    strictly prohibited and illegal. Provide information on the legal blood alcohol concentration (BAC)
+                    limits in your area.
+                </li>
+                <li><b>Vehicle Range (50km):</b>The distance your vehicle can run on a full tank of fuel or a full
+                    charge (for electric vehicles) varies by vehicle make and model. Refer to your vehicle's manual or
+                    specifications for this information.</li>
+                <li><b>Number of Persons Can Travel(includeing Child)--</b>less than two(2)
+                </li>
+            </ul>
+            Need driver<input type="checkbox" name="Driver" id="">
+            </p>
+            <button class="bg-blue-500 text-white px-4 py-2 mt-2 rent-vehicle" data-price="500">Rent Now</button>
+        </div>
+        <div class="bg-white rounded-lg shadow-md p-4 mt-4">
+            <h2 class="text-xl font-semibold">Bus Rental</h2>
+            <p>Price per Day: &#x20B9 5500</p>
+            <img src="/images/bus.jpg" alt="Scooter Rental 1" class="w-full mt-2">
+            <ul>
+                <li><strong>Alcohol and Drugs:</strong> Make it clear that driving under the influence of alcohol or
+                    drugs is strictly prohibited and illegal. Provide information on the legal blood alcohol
+                    concentration (BAC) limits in your area.</li>
+                <li><strong>Passenger Capacity:</strong> Specify the maximum number of passengers allowed on the bus,
+                    including any restrictions related to child passengers. Ensure compliance with safety regulations
+                    for passenger capacity.</li>
+                <li><strong>Emergency Procedures:</strong> Include information on emergency procedures and safety
+                    protocols for passengers, such as evacuation plans, emergency exits, and how to use safety equipment
+                    in case of an emergency.</li>
+                <li><strong>Accessibility:</strong> If applicable, provide information about accessibility features for
+                    passengers with disabilities, including wheelchair accessibility and securement procedures.</li>
+                <li><b>Already Driver Includes</b></li>
+            </ul>
+
+            <button class="bg-blue-500 text-white px-4 py-2 mt-2 rent-vehicle" data-price="5500">Rent Now</button>
+        </div>
+        <div class="bg-white rounded-lg shadow-md p-4 mt-4">
+            <h2 class="text-xl font-semibold">Bicycle Rental</h2>
+            <p>Price per Day: &#x20B9 200</p>
+            <img src="/images/bicycle.jpg" alt="Scooter Rental 1" class="w-full mt-2">
+            <ul>
+                <li><strong>Cycling Safety Gear:</strong> Always wear appropriate safety gear, including a well-fitted
+                    helmet, reflective clothing, and bright lights for visibility, especially when cycling at night.
+                </li>
+                <li><strong>Follow Traffic Laws:</strong> Obey all traffic laws and signals, including stopping at red
+                    lights and stop signs, using hand signals for turns, and yielding the right-of-way as required.</li>
+                <li><strong>Use Bike Lanes and Paths:</strong> Whenever possible, use designated bike lanes and paths.
+                    If not available, ride on the right side of the road in the same direction as traffic.</li>
+                <li><strong>Stay Alert:</strong> Maintain full attention while cycling. Avoid distractions such as
+                    headphones or using a mobile phone while riding.</li>
+                <li><strong>Passing and Overtaking:</strong> When passing other cyclists or vehicles, signal your
+                    intentions, check for oncoming traffic, and pass safely with enough clearance.</li>
+                <li><strong>Sidewalk Riding:</strong> Be aware of local regulations regarding riding on sidewalks. In
+                    many places, it's prohibited, and cyclists should use the road or designated bike paths instead.
+                </li>
+                <li><strong>Lock Your Bike:</strong> Always secure your bicycle with a high-quality lock when parking it
+                    to prevent theft.</li>
+                <li><strong>Riding at Night:</strong> Equip your bicycle with lights and reflectors for nighttime
+                    riding. Make sure you are visible to motorists.</li>
+                <li><strong>Respect Pedestrians:</strong> Yield the right-of-way to pedestrians and use caution when
+                    sharing paths or crosswalks with them.</li>
+                <li><strong>Maintenance:</strong> Regularly inspect and maintain your bicycle to ensure it is in safe
+                    working condition.</li>
+            </ul>
+            <button class="bg-blue-500 text-white px-4 py-2 mt-2 rent-vehicle" data-price="200">Rent Now</button>
+        </div>
+        <div class="bg-white rounded-lg shadow-md p-4 mt-4">
+            <h2 class="text-xl font-semibold">Jeep Rental</h2>
+            <p>Price per Day: &#x20B9 3500</p>
+            <img src="/images/jeep.jpg" alt="Scooter Rental 1" class="w-full mt-2">
+            <ul>
+                <li><strong>Driver's License:</strong> Emphasize the importance of having a valid driver's license that
+                    corresponds to the type of jeep being operated. Include information about age requirements and any
+                    special endorsements or permits required for certain jeeps.</li>
+                <li><strong>Traffic Laws:</strong> Highlight key traffic laws such as obeying speed limits, stopping at
+                    red lights and stop signs, and yielding the right-of-way. Encourage responsible driving habits to
+                    promote road safety.</li>
+                <li><strong>Seat Belts:</strong> Emphasize the importance of wearing seat belts at all times while
+                    traveling in the jeep. Mention any specific regulations regarding child safety seats if applicable.
+                </li>
+                <li><strong>Alcohol and Drugs:</strong> Make it clear that driving under the influence of alcohol or
+                    drugs is strictly prohibited and illegal. Provide information on the legal blood alcohol
+                    concentration (BAC) limits for jeep drivers in your area.</li>
+                <li><strong>Off-Roading Regulations:</strong> If the jeep is used for off-road activities, explain the
+                    regulations related to off-roading, including the use of designated trails and environmental
+                    conservation measures.</li>
+                <li><strong>Vehicle Maintenance:</strong> Stress the importance of regular maintenance for the jeep to
+                    ensure it is in safe working condition. Encourage checking brakes, tires, and other critical
+                    components.</li>
+                <li><strong>Passenger Safety:</strong> Explain the need for passengers to adhere to safety guidelines,
+                    including remaining seated while the jeep is in motion and following the driver's instructions.</li>
+                <li><strong>Emergency Equipment:</strong> Mention any required emergency equipment that should be
+                    carried in the jeep, such as a spare tire, jack, or first aid kit.</li>
+            </ul>
+            <button class="bg-blue-500 text-white px-4 py-2 mt-2 rent-vehicle" data-price="3500">Rent Now</button>
+        </div>
+
+        <!-- Total Rentals and Total Price -->
+        <div class="bg-white rounded-lg shadow-md p-4 mt-4">
+            <h2 class="text-xl font-semibold">Total</h2>
+            <p>Total Rentals: <span id="total-rentals" class="font-semibold text-blue-500">0</span></p>
+            <p>Total Price: <span id="total-price" class="font-semibold text-blue-500">0.00 &#x20B9</span></p>
+        </div>
+        <div class="mt-4">
+            <a href="./total"><button class="bg-green-500 text-white px-4 py-2 rounded-lg"
+                    id="proceed-to-checkout">Proceed to Checkout</button></a>
+        </div>
+    </div>
+
+    <script>
+        const rentVehicleButtons = document.querySelectorAll('.rent-vehicle');
+        const totalRentals = document.getElementById('total-rentals');
+        const totalPrice = document.getElementById('total-price');
+        const proceedToCheckoutButton = document.getElementById('proceed-to-checkout');
+
+        let totalRentalCount = 0;
+        let total = 0;
+
+        rentVehicleButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const price = parseFloat(button.getAttribute('data-price'));
+                totalRentalCount++;
+                total += price;
+                totalRentals.textContent = totalRentalCount;
+                totalPrice.textContent = total.toFixed(2) + ' INR';
+            });
+        });
+
+        proceedToCheckoutButton.addEventListener('click', () => {
+            if (totalRentalCount === 0) {
+                alert('Please rent at least one vehicle before proceeding to checkout.');
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+
+</html>
