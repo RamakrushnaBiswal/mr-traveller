@@ -15,7 +15,7 @@ var router = express.Router()
 passport.use(new GoogleStrategy({
   clientID: process.env['GOOGLE_CLIENT_ID'],
   clientSecret: process.env['GOOGLE_CLIENT_SECRET'],
-  callbackURL: 'https://mr-traveller.onrender.com/login/oauth2/redirect/google',
+  callbackURL: 'https://mr-traveller.onrender.com/oauth2/redirect/google',
   scope: [ 'profile' ]
 }, function verify(issuer, profile, cb) {
   db.get('SELECT * FROM federated_credentials WHERE provider = ? AND subject = ?', [
@@ -106,7 +106,7 @@ router.get('/login/federated/google', passport.authenticate('google'));
     user returns, they are signed in to their linked account.
 */
 router.get('/oauth2/redirect/google', passport.authenticate('google', {
-  successReturnToOrRedirect: 'https://mr-traveller.onrender.com/',
+  successReturnToOrRedirect: '/',
   failureRedirect: '/login'
 }));
 
