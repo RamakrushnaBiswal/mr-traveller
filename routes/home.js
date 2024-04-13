@@ -36,7 +36,4 @@ router.get('/travel',ensureLoggedIn, (req, res) => {
 router.get('/total',ensureLoggedIn, (req, res) => {
     res.render('total');
 });
-router.get('/register',ensureLoggedIn, (req, res) => {
-    res.render('register');
-});
 module.exports = router

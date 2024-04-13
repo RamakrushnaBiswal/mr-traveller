@@ -1,55 +1,56 @@
 var express = require('express');
 var passport = require('passport');
-var GoogleStrategy = require('passport-google-oidc');
-var db = require('../db');
+var GoogleStrategy = require('passport-google-oidc').Strategy;
 var router = express.Router()
-
-
-// Configure the Google strategy for use by Passport.
-//
-// OAuth 2.0-based strategies require a `verify` function which receives the
-// credential (`accessToken`) for accessing the Facebook API on the user's
-// behalf, along with the user's profile.  The function must invoke `cb`
-// with a user object, which will be set at `req.user` in route handlers after
-// authentication.
+const { User, FederatedCredentials } = require('../models/googleuser');
+// Passport implementation using Mongoose models
 passport.use(new GoogleStrategy({
   clientID: process.env['GOOGLE_CLIENT_ID'],
   clientSecret: process.env['GOOGLE_CLIENT_SECRET'],
-  callbackURL: 'https://mr-traveller.onrender.com/oauth2/redirect/google',
-  scope: [ 'profile' ]
+  callbackURL: 'http://localhost:3000/oauth2/redirect/google',
+  scope: ['profile']
 }, function verify(issuer, profile, cb) {
-  db.get('SELECT * FROM federated_credentials WHERE provider = ? AND subject = ?', [
-    issuer,
-    profile.id
-  ], function(err, row) {
-    if (err) { return cb(err); }
-    if (!row) {
-      db.run('INSERT INTO users (name) VALUES (?)', [
-        profile.displayName
-      ], function(err) {
-        if (err) { return cb(err); }
-        var id = this.lastID;
-        db.run('INSERT INTO federated_credentials (user_id, provider, subject) VALUES (?, ?, ?)', [
-          id,
-          issuer,
-          profile.id
-        ], function(err) {
-          if (err) { return cb(err); }
-          var user = {
-            id: id,
-            name: profile.displayName
-          };
-          return cb(null, user);
-        });
-      });
-    } else {
-      db.get('SELECT * FROM users WHERE id = ?', [ row.user_id ], function(err, row) {
-        if (err) { return cb(err); }
-        if (!row) { return cb(null, false); }
-        return cb(null, row);
-      });
-    }
-  });
+  // Check if the user already exists
+  User.findOne({ name: profile.displayName })
+    .then(user => {
+      if (!user) {
+        // If user does not exist, create a new user and federated credentials
+        const newUser = new User({ name: profile.displayName });
+        return newUser.save()
+          .then(savedUser => {
+            const newFederatedCredentials = new FederatedCredentials({
+              user_id: savedUser._id,
+              provider: issuer,
+              subject: profile.id
+            });
+            return newFederatedCredentials.save()
+              .then(() => cb(null, savedUser))
+              .catch(err => cb(err));
+          })
+          .catch(err => cb(err));
+      } else {
+        // If user exists, find the federated credentials
+        return FederatedCredentials.findOne({ user_id: user._id, provider: issuer, subject: profile.id })
+          .then(credentials => {
+            if (!credentials) {
+              // If federated credentials do not exist, create new credentials
+              const newFederatedCredentials = new FederatedCredentials({
+                user_id: user._id,
+                provider: issuer,
+                subject: profile.id
+              });
+              return newFederatedCredentials.save()
+                .then(() => cb(null, user))
+                .catch(err => cb(err));
+            } else {
+              // If federated credentials exist, return the user
+              return cb(null, user);
+            }
+          })
+          .catch(err => cb(err));
+      }
+    })
+    .catch(err => cb(err));
 }));
   
 // Configure Passport authenticated session persistence.

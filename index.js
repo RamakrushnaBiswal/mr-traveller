@@ -12,6 +12,7 @@ require("./dbconnection"); //db connection
 const homeRouter = require("./routes/home");
 var SQLiteStore = require('connect-sqlite3')(session);
 var authRouter = require('./routes/auth');
+const registerRouter = require('./routes/register');
 
 
 //middlewares
@@ -28,8 +29,8 @@ app.use(session({
     resave: false, // don't save session if unmodified
     saveUninitialized: false, // don't create session until something stored
     store: new SQLiteStore({ db: 'sessions.db', dir: './var/db' }),
-    //add cokkie for 1 minutes
-    cookie: { maxAge: 1 * 60 * 1000 }, // 1 minute
+    //add cokkie for 24 hrs
+    cookie: { maxAge: 24 * 60 * 60 * 1000 },// 24 hrs
     httponly: true,
     unset: 'destroy'
   }));
@@ -51,6 +52,7 @@ app.use(session({
 //routes
 app.use("/", homeRouter);
 app.use("/", authRouter);
+app.use("/", registerRouter);
 
 
 

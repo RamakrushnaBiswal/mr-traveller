@@ -48,36 +48,36 @@
         <div class="register-form container mt-4">
             <h1>Register <span>Here</span></h1>
             <form action="/register" method="post" onsubmit="return validateform()">
-
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 <input type="text" name="name" placeholder="Name" id="name" required>
                 <input type="email" name="email" placeholder="Email-Id" id="" required>
                 <input type="tel" name="phone" placeholder="Phone No." id="phonenum" required>
                 <input type="text" name="age" placeholder="Age" id="" required>
                 <h4>Gender</h4>
-                <input type="radio" name="mygender" id="male" value="Male" required> Male &nbsp; &nbsp; &nbsp; &nbsp;
+                <input type="radio" name="gender" id="male" value="male" required> Male &nbsp; &nbsp; &nbsp; &nbsp;
                 &nbsp; &nbsp;
-                <input type="radio" name="mygender" id="female" value="Female" required> Female
+                <input type="radio" name="gender" id="female" value="female" required> Female
                 <h4>Departure</h4>
                 <input type="datetime-local" name="departuredate" id="" required>
                 <h4>Return</h4>
                 <input type="datetime-local" name="returndate" id="" required>
                 <h4>Travel Destination</h4>
-                <input type="checkbox" name="destination" id="kashmir" value="Kashmir"> Kashmir &nbsp; &nbsp; &nbsp;
-                <input type="checkbox" name="destination" id="Puri" value="Puri"> Puri &nbsp; &nbsp; &nbsp;
-                <input type="checkbox" name="destination" id="Siridi" value="Siridi"> Siridi &nbsp; &nbsp; &nbsp;
-                <input type="checkbox" name="destination" id="Varanasi" value="Varanasi"> Varanasi &nbsp; &nbsp; &nbsp;
-                <input type="checkbox" name="destination" id="Mumbai" value="Mumbai"> Mumbai &nbsp; &nbsp; &nbsp; &nbsp;
+                <input type="checkbox" name="destination" id="kashmir" value="kashmir"> Kashmir &nbsp; &nbsp; &nbsp;
+                <input type="checkbox" name="destination" id="puri" value="puri"> Puri &nbsp; &nbsp; &nbsp;
+                <input type="checkbox" name="destination" id="siridi" value="siridi"> Siridi &nbsp; &nbsp; &nbsp;
+                <input type="checkbox" name="destination" id="Varanasi" value="varanasi"> Varanasi &nbsp; &nbsp; &nbsp;
+                <input type="checkbox" name="destination" id="Mumbai" value="mumbai"> Mumbai &nbsp; &nbsp; &nbsp; &nbsp;
                 &nbsp;
-                <input type="checkbox" name="destination" id="Sikkim" value="Sikkim"> Sikkim &nbsp; &nbsp; &nbsp;
-                <input type="checkbox" name="destination" id="Tirupati" value="Tirupati"> Tirupati &nbsp; &nbsp; &nbsp;
-                <input type="checkbox" name="destination" id="Similipal" value="Similipal"> Similipal &nbsp; &nbsp;
+                <input type="checkbox" name="destination" id="Sikkim" value="sikkim"> Sikkim &nbsp; &nbsp; &nbsp;
+                <input type="checkbox" name="destination" id="Tirupati" value="tirupati"> Tirupati &nbsp; &nbsp; &nbsp;
+                <input type="checkbox" name="destination" id="Similipal" value="similipal"> Similipal &nbsp; &nbsp;
                 &nbsp;
                 <br> <br>
                 <h4>Package</h4>
-                <input type="radio" name="locations" id="bronze" value="Bronze" required> Bronze &nbsp; &nbsp; &nbsp;
-                <input type="radio" name="locations" id="silver" value="Silver"> Silver &nbsp; &nbsp; &nbsp;
-                <input type="radio" name="locations" id="gold" value="Gold"> Gold &nbsp; &nbsp; &nbsp;
-                <input type="radio" name="locations" id="platinum" value="Platinum"> Platinum &nbsp; &nbsp; &nbsp;
+                <input type="radio" name="package" id="bronze" value="bronze" required> Bronze &nbsp; &nbsp; &nbsp;
+                <input type="radio" name="package" id="silver" value="silver"> Silver &nbsp; &nbsp; &nbsp;
+                <input type="radio" name="package" id="gold" value="gold"> Gold &nbsp; &nbsp; &nbsp;
+                <input type="radio" name="package" id="platinum" value="platinum"> Platinum &nbsp; &nbsp; &nbsp;
                 <br> <br>
                 <input type="checkbox" name="t_and_c" id="t_and_c" checked required> I accept the Terms & Conditions.
                 <br> <br>
