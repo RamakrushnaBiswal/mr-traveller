@@ -2,18 +2,16 @@ var express = require('express');
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oidc').Strategy;
 var router = express.Router()
-let { User }  = require('../models/data');
-let FederatedCredentials  = require('../models/googleuser');
+const { User, FederatedCredentials } = require('../models/googleuser');
 // Passport implementation using Mongoose models
 passport.use(new GoogleStrategy({
   clientID: process.env['GOOGLE_CLIENT_ID'],
   clientSecret: process.env['GOOGLE_CLIENT_SECRET'],
-  // callbackURL: 'http://localhost:3000/oauth2/redirect/google', //for devlopment
-  callbackURL:'https://mr-traveller.onrender.com/oauth2/redirect/google',
+  callbackURL: 'http://localhost:3000/oauth2/redirect/google',
   scope: ['profile']
-}, async function verify(issuer, profile, cb) {
+}, function verify(issuer, profile, cb) {
   // Check if the user already exists
-  await User.findOne({ name: profile.displayName })
+  User.findOne({ name: profile.displayName })
     .then(user => {
       if (!user) {
         // If user does not exist, create a new user and federated credentials

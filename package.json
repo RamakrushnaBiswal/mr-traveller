@@ -26,7 +26,6 @@
     "passport": "^0.7.0",
     "passport-google-oidc": "^0.1.0",
     "pluralize": "^8.0.0",
-    "sqlite3": "^5.1.7",
-    "uuid": "^9.0.1"
+    "sqlite3": "^5.1.7"
   }
 }
