@@ -2,7 +2,8 @@ var express = require('express');
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oidc').Strategy;
 var router = express.Router()
-const { User, FederatedCredentials } = require('../models/googleuser');
+const {User}  = require('../models/data');
+const FederatedCredentials  = require('../models/googleuser');
 // Passport implementation using Mongoose models
 passport.use(new GoogleStrategy({
   clientID: process.env['GOOGLE_CLIENT_ID'],

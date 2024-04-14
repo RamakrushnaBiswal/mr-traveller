@@ -1,5 +1,5 @@
 const express = require('express');
-const UserModel = require('../models/data'); // Renamed variable to UserModel
+const { Data, User } = require('../models/data'); // Renamed variable to UserModel
 const router = express.Router();
 const csrf = require('csurf');
 const body_parser = require('body-parser');
@@ -17,7 +17,7 @@ router.get('/register', ensureLoggedIn, (req, res) => {
 
 router.post('/register', ensureLoggedIn, (req, res) => {
     let data = req.body;
-    const newuser = new UserModel(data); // Changed variable name to UserModel
+    const newuser = new Data(data);
     newuser.save()
         .then(() => {
             res.redirect('/thankyou');
@@ -27,6 +27,36 @@ router.post('/register', ensureLoggedIn, (req, res) => {
         });
 });
 
-// Route to fetch user data and render EJS templat
+router.get('/booking', ensureLoggedIn, async (req, res) => {
+    try {
+        const users = await User.find();
+        const data = await Data.find();
+        const csrfToken = req.csrfToken();
+
+        const userUuidMap = new Map();
+        users.forEach(user => userUuidMap.set(user.uuid, user));
+        const userData = data.filter(dataItem => userUuidMap.has(dataItem.uuid));
+
+        res.render('booking', { userData: userData,csrfToken: csrfToken });
+
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+// router.delete('/booking/:uuid', ensureLoggedIn, async (req, res) => {
+//     try {
+//         const { uuid } = req.params;
+//         // Delete the data associated with the given UUID
+//         await Data.deleteMany({ uuid: uuid });
+
+//         // Redirect to the booking page after deletion
+//         res.redirect('/booking');
+
+//     } catch (error) {
+//         console.error('Error:', error);
+//         res.status(500).send('Internal Server Error');
+//     }
+// });
 
 module.exports = router;
