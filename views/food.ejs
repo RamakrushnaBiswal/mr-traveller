@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Food Service</title>
+    <style>
+        img{
+            height: 250px;
+            padding-right: 1000px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-4">
+        <h1 class="text-3xl font-semibold">Food Service</h1>
+
+        <!-- Food Card 1 -->
+        <div class="bg-white rounded-lg shadow-md p-4 mt-4">
+            <h2 class="text-xl font-semibold">Veg Pizza</h2>
+            <p>Veg/Non-Veg: Veg</p>
+            <p>&#x20B9 150</p>
+            <img src="/images/food_image_1.jpg" alt="Food Item 1" class="w-full mt-2">
+            <button class="bg-blue-500 text-white px-4 py-2 mt-2 add-to-cart" data-price="150" >Add to Cart</button>
+        </div>
+
+        <!-- Food Card 2 -->
+        <div class="bg-white rounded-lg shadow-md p-4 mt-4">
+            <h2 class="text-xl font-semibold">Fish Fry</h2>
+            <p>Veg/Non-Veg: Non-Veg</p>
+            <p>&#x20B9 180</p>
+            <img src="/images/food_image_2.jpg" alt="Food Item 2" class="w-full mt-2">
+            <button class="bg-blue-500 text-white px-4 py-2 mt-2 add-to-cart" data-price="180">Add to Cart</button>
+        </div>
+        <div class="bg-white rounded-lg shadow-md p-4 mt-4">
+            <h2 class="text-xl font-semibold">Prown Fry</h2>
+            <p>Veg/Non-Veg: Non-Veg</p>
+            <p>&#x20B9 100</p>
+            <img src="/images/food_image_3.jpg" alt="Food Item 2" class="w-full mt-2">
+            <button class="bg-blue-500 text-white px-4 py-2 mt-2 add-to-cart" data-price="100">Add to Cart</button>
+        </div>
+        <div class="bg-white rounded-lg shadow-md p-4 mt-4">
+            <h2 class="text-xl font-semibold">Veg Salad</h2>
+            <p>Veg/Non-Veg: Veg</p>
+            <p>&#x20B9 120</p>
+            <img src="/images/food_image_4.jpg" alt="Food Item 2" class="w-full mt-2">
+            <button class="bg-blue-500 text-white px-4 py-2 mt-2 add-to-cart" data-price="120">Add to Cart</button>
+        </div>
+        <div class="bg-white rounded-lg shadow-md p-4 mt-4">
+            <h2 class="text-xl font-semibold">Cokie and French Fry</h2>
+            <p>Veg/Non-Veg: Veg</p>
+            <p>&#x20B9 200</p>
+            <img src="/images/food_image_5.jpg" alt="Food Item 2" class="w-full mt-2">
+            <button class="bg-blue-500 text-white px-4 py-2 mt-2 add-to-cart" data-price="200">Add to Cart</button>
+        </div>
+        <div class="bg-white rounded-lg shadow-md p-4 mt-4">
+            <a href="https://www.google.co.in/maps/search/near+by+resturants"><button class="bg-yellow-500 text-white px-4 py-2 mt-2 add-to-cart">CLick To see Near By Resturants</button></a>
+                
+        </div>
+
+        <!-- Total Items and Total Price -->
+        <div class="bg-white rounded-lg shadow-md p-4 mt-4">
+            <h2 class="text-xl font-semibold">Total</h2>
+            <p>Total Items: <span id="total-items" class="font-semibold text-blue-500">0</span></p>
+            <p>Total Price: <span id="total-price" class="font-semibold text-blue-500">0.00  &#x20B9</span></p>
+        </div>
+        <div class="mt-4">
+            <a href="./total"><button class="bg-green-500 text-white px-4 py-2 rounded-lg" id="proceed-to-checkout">Proceed to Checkout</button></a>
+        </div>
+    </div>
+
+    <script>
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        const totalItems = document.getElementById('total-items');
+        const totalPrice = document.getElementById('total-price');
+        const proceedToCheckoutButton = document.getElementById('proceed-to-checkout');
+
+        let totalItemCount = 0;
+        let total = 0;
+
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const price = parseFloat(button.getAttribute('data-price'));
+                totalItemCount++;
+                total += price;
+                totalItems.textContent = totalItemCount;
+                totalPrice.textContent = total.toFixed(2) + ' INR';
+            });
+        });
+
+        proceedToCheckoutButton.addEventListener('click', () => {
+            if (totalItemCount === 0) {
+                alert('Please add at least one item to your cart before proceeding to checkout.');
+                // Prevent the default behavior (following the link)
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>

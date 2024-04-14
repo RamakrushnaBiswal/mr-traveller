@@ -36,4 +36,19 @@ router.get('/travel',ensureLoggedIn, (req, res) => {
 router.get('/total',ensureLoggedIn, (req, res) => {
     res.render('total');
 });
+router.get('/health',ensureLoggedIn, (req, res) => {
+    res.render('health');
+}); 
+router.get('/food',ensureLoggedIn, (req, res) => {
+    res.render('food');
+});
+router.get('/hotel',ensureLoggedIn, (req, res) => {
+    res.render('hotel');
+})
+router.get('/offlinemap',ensureLoggedIn, (req, res) => {
+    res.render('offlinemap');
+})
+router.get('/tour',ensureLoggedIn, (req, res) => {
+    res.render('tour');
+})
 module.exports = router

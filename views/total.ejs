@@ -3,79 +3,228 @@
 
 <head>
     <title>Payment Page</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
 </head>
-
-<body class="bg-gray-200">
-    <div class="flex">
-        <!-- Sidebar -->
-        <div class="w-1/5 bg-gray-100 p-4">
-            <div class="space-y-2">
-                <button class="w-full py-2 px-4 bg-gray-300 hover:bg-gray-400 text-left text-black text-lg"
-                    onclick="openCity(event, 'Credit Card')" id="defaultOpen">Credit Card</button>
-                <button class="w-full py-2 px-4 bg-gray-300 hover:bg-gray-400 text-left text-black text-lg"
-                    onclick="openCity(event, 'Debit Card')">Debit Card</button>
-                <button class="w-full py-2 px-4 bg-gray-300 hover:bg-gray-400 text-left text-black text-lg"
-                    onclick="openCity(event, 'Debit Card + ATM Pin')">Debit Card + ATM Pin</button>
-                <button class="w-full py-2 px-4 bg-gray-300 hover:bg-gray-400 text-left text-black text-lg"
-                    onclick="openCity(event, 'Internet Banking')">Internet Banking</button>
-                <button class="w-full py-2 px-4 bg-gray-300 hover:bg-gray-400 text-left text-black text-lg"
-                    onclick="openCity(event, 'Wallet/Cash Card')">Wallet/Cash Card</button>
-                <button class="w-full py-2 px-4 bg-gray-300 hover:bg-gray-400 text-left text-black text-lg"
-                    onclick="openCity(event, 'IMPS')">IMPS</button>
-            </div>
-        </div>
-
-        <!-- Content -->
-        <div class="w-4/5 p-4">
-            <div id="Credit Card" class="tabcontent">
-                <h3 class="text-2xl font-bold">Pay by Credit Card</h3>
-                <p class="text-lg">Card Number</p>
-                <input type="text" name="card" placeholder="Enter Card Number"
-                    class="w-1/2 px-2 py-1 border border-gray-300 rounded" required>
-
-                <p class="text-lg">Expiration Date</p>
-                <input type="month" name="month" placeholder="Month"
-                    class="w-1/2 px-2 py-1 border border-gray-300 rounded" required>
-
-                <p class="text-lg">CVV/CVC</p>
-                <input type="text" name="cvv" class="w-1/2 px-2 py-1 border border-gray-300 rounded" required>
-
-                <p class="text-lg">Card Holder Name</p>
-                <input type="text" name="name" placeholder="Enter Card Holder Name"
-                    class="w-1/2 px-2 py-1 border border-gray-300 rounded" required>
-
-                <a href="./thankyou">
-                    <input type="submit" value="Submit"
-                        class="bg-gray-300 hover:bg-gray-400 text-black py-2 px-4 mt-4 rounded">
-                </a>
-            </div>
-
-            <!-- Other card type sections go here -->
-
-        </div>
-    </div>
-
-    <script>
-        function openCity(evt, mop) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-
-            document.getElementById(mop).style.display = "block";
-            evt.currentTarget.className += " active";
+    <style>
+        /* Body */
+        body {
+            background-color: rgb(255, 250, 235);
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
         }
+.container {
+  display: grid;
+  grid-template-columns: auto;
+  gap: 0px;
+}
 
-        // Get the element with id="defaultOpen" and click on it
-        document.getElementById("defaultOpen").click();
-    </script>
+hr {
+  height: 1px;
+  background-color: rgba(16, 86, 82, .75);
+  ;
+  border: none;
+}
+
+.card {
+  width: 400px;
+  background: rgb(255, 250, 235);
+  box-shadow: 0px 187px 75px rgba(0, 0, 0, 0.01), 0px 105px 63px rgba(0, 0, 0, 0.05), 0px 47px 47px rgba(0, 0, 0, 0.09), 0px 12px 26px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  width: 100%;
+  height: 40px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  border-bottom: 1px solid rgba(16, 86, 82, .75);
+  ;
+  font-weight: 700;
+  font-size: 11px;
+  color: #000000;
+}
+
+/* Cart */
+.cart {
+  border-radius: 19px 19px 0px 0px;
+}
+
+.cart .steps {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.cart .steps .step {
+  display: grid;
+  gap: 10px;
+}
+
+.cart .steps .step span {
+  font-size: 13px;
+  font-weight: 600;
+  color: #000000;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.cart .steps .step p {
+  font-size: 11px;
+  font-weight: 600;
+  color: #000000;
+}
+
+/* Promo */
+.promo form {
+  display: grid;
+  grid-template-columns: 1fr 80px;
+  gap: 10px;
+  padding: 0px;
+}
+
+.input_field {
+  width: auto;
+  height: 36px;
+  padding: 0 0 0 12px;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid  rgb(16, 86, 82);
+  background-color: rgb(251, 243, 228);
+  transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
+}
+
+.input_field:focus {
+  border: 1px solid transparent;
+  box-shadow: 0px 0px 0px 2px rgb(251, 243, 228);
+  background-color: rgb(201, 193, 178);
+}
+
+.promo form button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 18px;
+  gap: 10px;
+  width: 100%;
+  height: 36px;
+  background: rgba(16, 86, 82, .75);
+  box-shadow: 0px 0.5px 0.5px #F3D2C9, 0px 1px 0.5px rgba(239, 239, 239, 0.5);
+  border-radius: 5px;
+  border: 0;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 15px;
+  color: #000000;
+}
+
+/* Checkout */
+.payments .details {
+  display: grid;
+  grid-template-columns: 10fr 1fr;
+  padding: 0px;
+  gap: 5px;
+}
+
+.payments .details span:nth-child(odd) {
+  font-size: 12px;
+  font-weight: 600;
+  color: #000000;
+  margin: auto auto auto 0;
+}
+
+.payments .details span:nth-child(even) {
+  font-size: 13px;
+  font-weight: 600;
+  color: #000000;
+  margin: auto 0 auto auto;
+}
+
+.checkout .footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 10px 10px 20px;
+  background-color: rgba(16, 86, 82, .5);
+}
+
+.price {
+  position: relative;
+  font-size: 22px;
+  color: #2B2B2F;
+  font-weight: 900;
+}
+
+.checkout .checkout-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 36px;
+  background: rgba(16, 86, 82, .55);
+  box-shadow: 0px 0.5px 0.5px rgba(16, 86, 82, .75), 0px 1px 0.5px rgba(16, 86, 82, .75);
+  ;
+  border-radius: 7px;
+  border: 1px solid rgb(16, 86, 82);
+  ;
+  color: #000000;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
+}
+    </style>
+<body>
+    <div class="container">
+        <div class="card cart">
+          <label class="title">CHECKOUT</label>
+          <div class="steps">
+            <div class="step">
+              <div>
+                <span>SHIPPING</span>
+                <p>221B Baker Street, W1U 8ED</p>
+                <p>London, United Kingdom</p>
+              </div>
+              <hr>
+              <div>
+                <span>PAYMENT METHOD</span>
+                <p>Visa</p>
+                <p>**** **** **** 4243</p>
+              </div>
+              <hr>
+              <div class="promo">
+                <span>HAVE A PROMO CODE?</span>
+                <form class="form">
+                  <input type="text" placeholder="Enter a Promo Code" class="input_field">
+                  <button>Apply</button>
+                </form>
+              </div>
+              <hr>
+              <div class="payments">
+                <span>PAYMENT</span>
+                <div class="details">
+                  <span>Subtotal:</span>
+                  <span>$240.00</span>
+                  <span>Shipping:</span>
+                  <span>$10.00</span>
+                  <span>Tax:</span>
+                  <span>$30.40</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <div class="card checkout">
+          <div class="footer">
+            <label class="price"></label>
+            <a href="./thankyou"><button class="checkout-btn">Checkout</button></a>
+          </div>
+        </div>
+      </div>
 </body>
 
 </html>

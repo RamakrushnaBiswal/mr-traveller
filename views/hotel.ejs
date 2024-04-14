@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Hotel Service</title>
+    <link rel="icon" href="./images/logo.png">
+    <style>
+        img{
+            height: 300px;
+            width: 200px;
+            padding-right: 1000px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-4">
+        <h1 class="text-3xl font-semibold">Hotel Service</h1>
+
+        <!-- Hotel Card 1 -->
+        <div class="bg-white rounded-lg shadow-md p-4 mt-4">
+            <h2 class="text-xl font-semibold">Dibya Paradise</h2>
+            <p>Price per Night: &#x20B9 2500</p>
+            <img src="/images/hotel_image_1.jpg" alt="Hotel Room 1" class="w-full mt-2">
+            <button class="bg-blue-500 text-white px-4 py-2 mt-2 book-room" data-price="2500">Book Now</button>
+        </div>
+
+        <!-- Hotel Card 2 -->
+        <div class="bg-white rounded-lg shadow-md p-4 mt-4">
+            <h2 class="text-xl font-semibold">Subudhi hotel and lodge</h2>
+            <p>Price per Night: &#x20B9 3500</p>
+            <img src="/images/hotel_image_2.jpg" alt="Hotel Room 2" class="w-full mt-2">
+            <button class="bg-blue-500 text-white px-4 py-2 mt-2 book-room" data-price="3500">Book Now</button>
+        </div>
+        <div class="bg-white rounded-lg shadow-md p-4 mt-4">
+            <h2 class="text-xl font-semibold">Santi hotel and lodge</h2>
+            <p>Price per Night: &#x20B9 4000</p>
+            <img src="/images/hotel_image_3.jpg" alt="Hotel Room 2" class="w-full mt-2">
+            <button class="bg-blue-500 text-white px-4 py-2 mt-2 book-room" data-price="4000">Book Now</button>
+        </div>
+        <div class="bg-white rounded-lg shadow-md p-4 mt-4">
+            <h2 class="text-xl font-semibold">Rama Bas</h2>
+            <p>Price per Night: &#x20B9 4500</p>
+            <img src="/images/hotel_image_4.jpg" alt="Hotel Room 2" class="w-full mt-2">
+            <button class="bg-blue-500 text-white px-4 py-2 mt-2 book-room" data-price="4500">Book Now</button>
+        </div>
+        <div class="bg-white rounded-lg shadow-md p-4 mt-4">
+            <h2 class="text-xl font-semibold">Govinda Nibas</h2>
+            <p>Price per Night: &#x20B9 5000</p>
+            <img src="/images/hotel_image_5.jpg" alt="Hotel Room 2" class="w-full mt-2">
+            <button class="bg-blue-500 text-white px-4 py-2 mt-2 book-room" data-price="5000">Book Now</button>
+        </div>
+
+        <!-- Total Rooms and Total Price -->
+        <div class="bg-white rounded-lg shadow-md p-4 mt-4">
+            <h2 class="text-xl font-semibold">Total</h2>
+            <p>Total Rooms: <span id="total-rooms" class="font-semibold text-blue-500">0</span></p>
+            <p>Total Price: <span id="total-price" class="font-semibold text-blue-500">0.00  &#x20B9</span></p>
+        </div>
+        <div class="mt-4">
+            <a href="./total"><button class="bg-green-500 text-white px-4 py-2 rounded-lg" id="proceed-to-checkout">Proceed to Checkout</button></a>
+        </div>
+    </div>
+
+    <script>
+        const bookRoomButtons = document.querySelectorAll('.book-room');
+        const totalRooms = document.getElementById('total-rooms');
+        const totalPrice = document.getElementById('total-price');
+        const proceedToCheckoutButton = document.getElementById('proceed-to-checkout');
+
+        let totalRoomCount = 0;
+        let total = 0;
+
+        bookRoomButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const price = parseFloat(button.getAttribute('data-price'));
+                totalRoomCount++;
+                total += price;
+                totalRooms.textContent = totalRoomCount;
+                totalPrice.textContent = total.toFixed(2) + ' INR';
+            });
+        });
+
+        proceedToCheckoutButton.addEventListener('click', () => {
+            if (totalRoomCount === 0) {
+                alert('Please book at least one room before proceeding to checkout.');
+                // Prevent the default behavior (following the link)
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>

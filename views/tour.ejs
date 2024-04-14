@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tour guide</title>
+    <link rel="icon" href="./images/logo.png">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgb(26, 22, 22);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .teammate-card {
+            width: calc(33.33% - 20px);
+            background-color: transparent;
+            border: 1px solid transparent;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .teammate-card img {
+            max-width: 100%;
+            border-radius: 50%;
+        }
+
+        .teammate-name {
+            font-family: 'Open Sans', sans-serif;
+            ;
+            font-size: 30px;
+            color: #f39f54;
+            font-weight: bold;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .teammate-exp {
+            color: antiquewhite;
+            font-size: 20px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="teammate-name" style="align-items: center; font-size: 50px;">TOUR GUIDERS</h1>
+    <section class="about">
+        <div class="container">
+            <!-- Teammate 1 -->
+            <div class="teammate-card">
+                <img src="./images/teammate1.jpg" alt="Teammate 1">
+                <div class="teammate-name">Ramakrushna Biswal</div>
+                <li class="teammate-exp">Experieces:- <strong>9 years</strong></li>
+                <li class="teammate-exp">Language Konws:- <strong>5 [English,Mandarin Chinese,Hindi,Bengoli]</strong>
+                </li>
+                <li class="teammate-exp">No Of Tours:- <strong>623</strong></li>
+                <li class="teammate-exp">Rating: ★★★★★</li>
+            </div>
+
+            <!-- Teammate 2 -->
+            <div class="teammate-card">
+                <img src="./images/teammate2.jpg" alt="Teammate 2">
+                <div class="teammate-name">Soumya Ranjan Subudhi</div>
+                <ul>
+                    <li class="teammate-exp">Experieces:- <strong>8 years</strong></li>
+                    <li class="teammate-exp">Language Konws:- <strong>6
+                            [odia,english,hindi,tamil,bengoli,marathi]</strong></li>
+                    <li class="teammate-exp">No Of Tours:- <strong>300</strong></li>
+                    <li class="teammate-exp">Rating: ★★★★☆</li>
+                </ul>
+            </div>
+
+        </div>
+</body>
+
+</html>
