@@ -8,7 +8,8 @@ const FederatedCredentials  = require('../models/googleuser');
 passport.use(new GoogleStrategy({
   clientID: process.env['GOOGLE_CLIENT_ID'],
   clientSecret: process.env['GOOGLE_CLIENT_SECRET'],
-  callbackURL: 'http://localhost:3000/oauth2/redirect/google',
+  // callbackURL: 'http://localhost:3000/oauth2/redirect/google', //for devlopment
+  callbackURL:'https://mr-traveller.onrender.com/oauth2/redirect/google',
   scope: ['profile']
 }, function verify(issuer, profile, cb) {
   // Check if the user already exists
