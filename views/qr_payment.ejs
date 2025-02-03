@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Payment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+        .qr-container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        #qrCode {
+            margin-bottom: 20px;
+        }
+        .total-amount {
+            font-size: 18px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .pay-btn {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .pay-btn:hover {
+            background-color: #218838;
+        }
+        .success-message {
+            font-size: 18px;
+            font-weight: bold;
+            color: green;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="qr-container">
+        <!-- Static QR Code Image -->
+        <img id="qrCode" src="images/qr.jpg" alt="QR Code" width="200" height="200">
+        
+        <!-- Total Amount -->
+        <div class="total-amount" id="totalAmount">
+            <span id="displayedAmount" style="color: #28a745; margin-left: 10px;"></span>
+        </div>
+        
+        <!-- Pay Button -->
+        <button class="pay-btn" onclick="processPayment()">Pay</button>
+        
+        <!-- Success Message -->
+        <div class="success-message" id="successMessage" style="display: none;"></div>
+    </div>
+
+    <script>
+        // Retrieve amount and number of tickets from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const amount = urlParams.get('amount');
+        const numberOfTickets = urlParams.get('tickets');
+
+        // Display the total amount
+        // document.getElementById('totalAmount').textContent = `Total Amount: ₹${discountedAmount}`;
+
+        // Function to handle payment processing
+        function processPayment() {
+            const successMessage = document.getElementById('successMessage');
+            successMessage.textContent = `Tickets are confirmed. Payment succeeded!`;
+            successMessage.style.display = 'block';
+
+            // Redirect to home page after 2 seconds
+            setTimeout(() => {
+                window.location.href = '/'; // Update this with your home page URL
+            }, 2000);
+        }
+    </script>
+    <script src="qr_payment.js"></script>
+</body>
+</html>

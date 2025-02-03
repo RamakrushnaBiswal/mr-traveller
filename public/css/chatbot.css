@@ -1,0 +1,136 @@
+
+#cbimg {
+    height:80px;
+    width:90px;
+    margin-left: 50%;
+    margin-top: 5%;
+    position: fixed;
+}
+
+#cbdiv {
+    height: 100%;
+    width: 100%;
+}
+
+h3, h4 {
+    color:rgb(246, 11, 246);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+}
+
+#cbform {
+    height: max-content;
+    width: max-content;
+    margin-left: 35%;
+    border: 2px solid black;
+    visibility: hidden;
+    padding: 20px;
+background: rgba(238, 167, 225, 0.08);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(9.1px);
+-webkit-backdrop-filter: blur(9.1px);
+border: 1px solid rgba(96, 255, 250, 0.77);
+
+}
+
+#others {
+    visibility: hidden;
+}
+
+#mic {
+    background-image: url("images/microphone.png");
+    background-size: cover;
+   width: 40px;
+   height: 40px;
+    margin-right: 20px;
+    border: hidden;
+    cursor: pointer;
+}
+
+#languages {
+    visibility: hidden;
+}
+
+#options {
+    visibility: hidden;
+}
+
+#enquiry {
+    visibility: hidden;
+}
+
+button{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 30px;
+    border: 0;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10rem;
+    transition: all 0.02s;
+    font-weight: bold;
+    cursor: pointer;
+    color: rgb(37, 37, 37);
+    z-index: 0;
+    box-shadow: 0 0px 7px -5px rgba(0, 0, 0, 0.5);
+    margin-top: 5px;
+  }
+  
+  button:hover {
+    background: rgb(193, 228, 248);
+    color: rgb(33, 0, 85);
+  }
+  
+  button:active {
+    transform: scale(0.97);
+  }
+  
+  .hoverEffect {
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  }
+  
+  .hoverEffect div {
+    background: rgb(222, 0, 75);
+    background: linear-gradient(
+      90deg,
+      rgba(222, 0, 75, 1) 0%,
+      rgba(191, 70, 255, 1) 49%,
+      rgba(0, 212, 255, 1) 100%
+    );
+    border-radius: 40rem;
+    width: 10rem;
+    height: 10rem;
+    transition: 0.4s;
+    filter: blur(20px);
+    animation: effect infinite 3s linear;
+    opacity: 0.5;
+  }
+  
+  button:hover .hoverEffect div {
+    width: 8rem;
+    height: 8rem;
+  }
+  
+  @keyframes effect {
+    0% {
+      transform: rotate(0deg);
+    }
+  
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+textarea{
+    width: 700px;
+    border-radius: 20px;
+}

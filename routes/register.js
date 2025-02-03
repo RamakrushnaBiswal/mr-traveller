@@ -1,5 +1,5 @@
 const express = require('express');
-const UserModel = require('../models/data'); // Renamed variable to UserModel
+const UserModel = require('../models/data'); 
 const router = express.Router();
 const csrf = require('csurf');
 const body_parser = require('body-parser');
@@ -12,11 +12,13 @@ router.use(body_parser.urlencoded({ extended: false }));
 router.use(csrf());
 
 router.get('/register', ensureLoggedIn, (req, res) => {
-    res.render('register', { csrfToken: req.csrfToken() });
+    const user=req.user.id;
+    res.render('register', { csrfToken: req.csrfToken(),user: user });
 });
 
 router.post('/register', ensureLoggedIn, (req, res) => {
     let data = req.body;
+    console.log(data);
     const newuser = new UserModel(data); // Changed variable name to UserModel
     newuser.save()
         .then(() => {

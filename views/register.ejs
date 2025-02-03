@@ -62,15 +62,15 @@
                 <h4>Return</h4>
                 <input type="datetime-local" name="returndate" id="" required>
                 <h4>Travel Destination</h4>
-                <input type="checkbox" name="destination" id="kashmir" value="kashmir"> Kashmir &nbsp; &nbsp; &nbsp;
-                <input type="checkbox" name="destination" id="puri" value="puri"> Puri &nbsp; &nbsp; &nbsp;
-                <input type="checkbox" name="destination" id="siridi" value="siridi"> Siridi &nbsp; &nbsp; &nbsp;
-                <input type="checkbox" name="destination" id="Varanasi" value="varanasi"> Varanasi &nbsp; &nbsp; &nbsp;
-                <input type="checkbox" name="destination" id="Mumbai" value="mumbai"> Mumbai &nbsp; &nbsp; &nbsp; &nbsp;
+                <input type="checkbox" name="destination" id="kashmir" value="National Museum"> National Museum &nbsp; &nbsp; &nbsp;
+                <input type="checkbox" name="destination" id="puri" value="Victorial Museum"> Victorial Museum &nbsp; &nbsp; &nbsp;
+                <input type="checkbox" name="destination" id="siridi" value="Indian Museum"> Indian Museum &nbsp; &nbsp; &nbsp;
+                <input type="checkbox" name="destination" id="Varanasi" value="Government Museum"> Government Museum &nbsp; &nbsp; &nbsp;
+                <input type="checkbox" name="destination" id="Mumbai" value="Calio Museum"> Calio Museum &nbsp; &nbsp; &nbsp; &nbsp;
                 &nbsp;
-                <input type="checkbox" name="destination" id="Sikkim" value="sikkim"> Sikkim &nbsp; &nbsp; &nbsp;
-                <input type="checkbox" name="destination" id="Tirupati" value="tirupati"> Tirupati &nbsp; &nbsp; &nbsp;
-                <input type="checkbox" name="destination" id="Similipal" value="similipal"> Similipal &nbsp; &nbsp;
+                <input type="checkbox" name="destination" id="Sikkim" value="Sikkim Museum"> Sikkim Museum &nbsp; &nbsp; &nbsp;
+                <input type="checkbox" name="destination" id="Tirupati" value="Dr Bhau Lad Jii"> Dr Bhau Lad Jii &nbsp; &nbsp; &nbsp;
+                <input type="checkbox" name="destination" id="Similipal" value="Salar Museum"> Salar Museum &nbsp; &nbsp;
                 &nbsp;
                 <br> <br>
                 <h4>Package</h4>
@@ -79,6 +79,8 @@
                 <input type="radio" name="package" id="gold" value="gold"> Gold &nbsp; &nbsp; &nbsp;
                 <input type="radio" name="package" id="platinum" value="platinum"> Platinum &nbsp; &nbsp; &nbsp;
                 <br> <br>
+                <input type="text" name="resid" id="resid" hidden value="<%= user %>">
+
                 <input type="checkbox" name="t_and_c" id="t_and_c" checked required> I accept the Terms & Conditions.
                 <br> <br>
                 <input type="submit" value="Submit" class="submitbtn">

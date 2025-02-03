@@ -20,6 +20,7 @@
             margin: 0;
             padding: 0;
         }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -36,6 +37,7 @@
             border-radius: 5px;
             padding: 20px;
             margin-bottom: 20px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .teammate-card img {
@@ -51,41 +53,50 @@
             margin-top: 10px;
             text-align: center;
         }
-        a{
-            text-decoration: none;
-            color: #fff;
+        .btn-outline-warning{
+            
+      margin-left: 47%;
+
         }
     </style>
 </head>
 <body class="aboutbody">
         <nav>
-            <a href="#"><img src="./images/logo.png" class="logo ms-5" alt="Logo" title="FirstFlight Travels">
+            <a href="#"><img src="./images/logo.png" class="logo" alt="Logo" title="FirstFlight Travels">
+
             <ul class="navbar">
                 <li>
-                    <a href="/" style="color: #fff;">Home</a>
-                    <a href="/#locations" style="color: #fff;">Locations</a>
-                    <a href="/#package" style="color: #fff;">Packages</a>
-                    <a href="/about" style="color: #fff;">About Us</a>
-                    <a href="/contact" style="color: #fff;">Contact Us</a>
+                    <a href="/">Home</a>
+                    <a href="./home#locations">Locations</a>
+                    <a href="./home#package">Packages</a>
+                    <a href="/about">About Us</a>
+                    <a href="/contact">Contact Us</a>
                 </li>
             </ul>
         </nav>
         
     <section class="about">
         <div class="container">
+            <!-- Teammate 1 -->
             <div class="teammate-card">
                 <img src="./images/teammate1.jpg" alt="Teammate 1">
                 <div class="teammate-name">Ramakrushna Biswal</div>
             </div>
+    
+            <!-- Teammate 2 -->
             <div class="teammate-card">
-                <img src="./images/teammate2.jpg" alt="Teammate 2">
-                <div class="teammate-name">Soumya Ranjan Subudhi</div>
-            </div>
-            <div class="teammate-card">
-                <img src="./images/teammate3.jpg" alt="Teammate 4">
+                <img src="./images/teammate3.jpg" alt="Teammate 2">
                 <div class="teammate-name">Umasankar Champtiray</div>
             </div>
+    
+            <div class="teammate-card">
+                <img src="./images/teammate4.jpg" alt="Teammate 4">
+                <div class="teammate-name">Soumya Ranjan Subudhi</div>
+            </div>
+           
+            
         </section>
+        <a href="./home"><button class="btn btn-outline-warning">Back to home</button></a>
 <section class="footer">
     <div class="foot">
         <div class="footer-content">
@@ -93,9 +104,9 @@
             <div class="footlinks">
                 <h4>Quick Links</h4>
                 <ul>
-                    <li><a href="/register">Register</a></li>
-                    <li><a href="/about">About Us</a></li>
-                    <li><a href="/contact">Contact Us</a></li>
+                    <li><a href="register.html">Register</a></li>
+                    <li><a href="locations.html">Locations</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
                 </ul>
             </div>
 
@@ -116,7 +127,7 @@
     </div>
 
     <div class="end">
-        <p>Copyright © 2024 Mr Traveller All Rights Reserved.<br>Website developed by: Mr Devlopers,GIETU</p>
+        <p>Copyright © 2022 Mr Traveller All Rights Reserved.<br>Website developed by: Mr Devlopers,GIETU</p>
     </div>
 </section>
 

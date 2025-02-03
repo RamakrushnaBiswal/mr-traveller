@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr Traveller</title>
+    <link rel="icon" href="./images/logo.png">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <!-- <link rel="stylesheet" type="text/css" href="css/chatbot.css"> -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Paytone+One&family=Poppins:wght@100;200;300;400;300;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+</head>
+<style>
+  .card-img-top{
+    height: 400px;
+    width: 1000px;
+   
+  }
+  .card-text{
+    height: fit-content;
+    width: 1000px;
+  }
+  .chatbot-logo{
+    position: absolute;
+    transform: translateX(-50%);
+    margin-top: 600px;
+    margin-left: 50px;
+    width: 80px;
+    animation: bounce 2s infinite; /* Add bounce animation */
+    transition: transform 0.3s ease; 
+}
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translate(-50%, 0);
+    }
+    40% {
+        transform: translate(-50%, -20px);
+    }
+    60% {
+        transform: translate(-50%, -10px);
+    }
+}
+
+.chat-modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Modal background */
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+}
+
+.chat-container {
+    background-color: white;
+    width: 800px;
+    height: max-content;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+#cbimg {
+    height:80px;
+    width:90px;
+    margin-left: 50%;
+    margin-top: 5%;
+    position: fixed;
+}
+
+#cbdiv {
+    height: 100%;
+    width: 100%;
+}
+
+#others {
+    visibility: hidden;
+}
+
+#mic {
+    background-image: url("images/microphone.png");
+    background-size: cover;
+   width: 40px;
+   height: 40px;
+    margin-right: 20px;
+    border: hidden;
+    cursor: pointer;
+}
+
+#languages {
+    visibility: hidden;
+}
+
+#options {
+    visibility: hidden;
+}
+
+#enquiry {
+    visibility: hidden;
+}
+
+.cbutton{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 10px;
+    border: 0;
+    position: relative;
+    overflow: hidden;
+    border-radius:3rem;
+    transition: all 0.02s;
+    font-weight: bold;
+    cursor: pointer;
+    color: rgb(37, 37, 37);
+    z-index: 0;
+    box-shadow: 0 0px 7px -5px rgba(0, 0, 0, 0.5);
+    margin-top: 5px;
+  }
+  
+  .cbutton:hover {
+    background: rgb(193, 228, 248);
+    color: rgb(33, 0, 85);
+  }
+  
+  .cbutton:active {
+    transform: scale(0.97);
+  }
+  
+  .hoverEffect {
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  }
+  
+  .hoverEffect div {
+    background: rgb(222, 0, 75);
+    background: linear-gradient(
+      90deg,
+      rgba(222, 0, 75, 1) 0%,
+      rgba(191, 70, 255, 1) 49%,
+      rgba(0, 212, 255, 1) 100%
+    );
+    border-radius: 40rem;
+    width: 5rem;
+    height: 10rem;
+    transition: 0.4s;
+    filter: blur(20px);
+    animation: effect infinite 3s linear;
+    opacity: 0.5;
+  }
+  
+  .cbutton:hover .hoverEffect div {
+    width: 8rem;
+    height: 8rem;
+  }
+  
+  @keyframes effect {
+    0% {
+      transform: rotate(0deg);
+    }
+  
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+textarea{
+    width: 700px;
+    border-radius: 20px;
+    padding: 10px;
+    font-size: medium;
+}
+
+h3, h4 {
+    color:rgb(246, 11, 246);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+} 
+
+/* #cbform {
+    margin-left: 35%;
+    border: 2px solid black;
+    padding: 20px;
+}  */
+</style>
+<body>
+    <div class="content" id="home">
+        <div class="content" id="home">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <img src="images/logo.png" class="logo" alt="Logo" title="FirstFlight Travels">
+                <ul class="navbar">
+                    <li>
+                        <a href="/">Home</a>
+                        <a href="/points">Points</a>
+                        <a href="/mlocation">Tour</a>
+                        <a href="/bookings">Bookings</a>
+                        <a href="/abtmuseum">About</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="banner" >
+                <img src="/images/victoria.jpg" alt="Banner Image" title="Banner Image" >
+              <div class="chatbot-logo" id="chatbot-logo">
+                  <img src="/images/chatbot.png" alt="Chatbot">
+              </div>
+
+              <div class="chat-modal" id="chat-modal">
+                <div class="chat-container">
+                  <div id="cbform">
+                    <h3>Hello, How can i help you?</h3>
+                    <button class="cbutton" onclick="chooseLang()">
+                        Choose Language
+                        <div class="hoverEffect">
+                          <div></div>
+                        </div>
+                      </button>
+                      
+                      <div id="languages">
+                        <h3>Choose Your Language</h3>
+                        <button class="cbutton" onclick="options('English')">
+                          English
+                          <div class="hoverEffect">
+                            <div></div>
+                          </div>
+                        </button>
+                        <button class="cbutton" onclick="options('Hindi')">
+                          Hindi
+                          <div class="hoverEffect">
+                            <div></div>
+                          </div>
+                        </button>
+                        <button class="cbutton" onclick="options('Odia')">
+                          Odia
+                          <div class="hoverEffect">
+                            <div></div>
+                          </div>
+                        </button>
+                        <button class="cbutton" onclick="options('Telugu')">
+                          Telugu
+                          <div class="hoverEffect">
+                            <div></div>
+                          </div>
+                        </button>
+                        <button class="cbutton" onclick="options('Tamil')">
+                          Tamil
+                          <div class="hoverEffect">
+                            <div></div>
+                          </div>
+                        </button>
+                        <button class="cbutton" onclick="options('Bengali')">
+                          Bengali
+                          <div class="hoverEffect">
+                            <div></div>
+                          </div>
+                        </button>
+                      </div>
+                      
+                    <div id="options">
+                        <h3 id="change1">Continue....</h3>
+                        <button class="cbutton" onclick="window.location.href='/bookings';">Book Ticket
+                            <div class="hoverEffect">
+                                <div></div>
+                              </div>
+                        </button>
+                        <button class="cbutton" onclick="window.location.href='/';">Cancel Ticket
+                            <div class="hoverEffect">
+                                <div></div>
+                              </div>
+                        </button>
+                        <button class="cbutton" onclick="window.location.href='/viewbookings/66d5c5c7f4d6cac380ba7502';">View Orders
+                            <div class="hoverEffect">
+                                <div></div>
+                              </div>
+                        </button>
+                        <button class="cbutton" onclick="ticketEnquiry()">Ticket Enquiry
+                            <div class="hoverEffect">
+                                <div></div>
+                              </div>
+                        </button>
+                        <button class="cbutton" onclick="others()">Others
+                            <div class="hoverEffect">
+                                <div></div>
+                              </div>
+                        </button>
+                    </div>
+                    <div id="enquiry">
+                        <h3 id="change2">...</h3>
+                    </div>
+                    <div id="others">
+                        <textarea id="ques" placeholder="Question in mind? If any."></textarea>
+                        <img id="mic">
+                        <h4 id="response"></h4>
+                    </div>
+                </div>
+                <div id="cbdiv">
+                    <!-- <img id="cbimg" onclick="chatbotClick()" src="/images/chatbot.png"> -->
+                    <script src="js/chatbot.js"></script>
+                </div>
+                </div>
+            </div>
+
+            </div>
+            <h1 style="text-align: center;margin-top: 30px;">Map</h1>
+            <div style="display: flex; justify-content: center;">
+              <img src="/images/map.jpg" alt="">
+            </div>
+
+            <section class="locations" id="locations">
+                <div class="package-title">
+                    <h2>Outside Views </h2>
+                </div>
+  <div >
+  
+<div style="width: 100%; margin-top: 100px;"> 
+  <div class="row row-cols-1 row-cols-md-3 g-4" style="display: flex;flex-direction: column; justify-content: center; align-items: center;">
+    <div class="col">
+      <div class="card">
+        <img src="images/o1.jpg" class="card-img-top" alt="..." style="height: 400px ; width: 1000px;">
+        <div class="card-body">
+          <h5 class="card-title" style="text-align: center;">The Musical Victoria</h5>
+          <p style="text-align: center;">By Ticket Bot</p>
+          <p class="card-text" style="text-align: center;">The mission of the Victoria Memorial Hall is to function as the premier art gallery, museum, research library on art history and museum studies, and cultural space in the city of Kolkata. In order to pursue this mission, it collects, conserves and disseminates knowledge among the general public about art objects, historical relics, and documents relating mainly to Indian history in the eighteenth, nineteenth and twentieth centuries. In addition to the exhibits on permanent display, the Victoria Memorial Hall also organizes regular special exhibitions, lectures, publications, cultural programmes and interactive educational activities – both on-site and in different parts of India and abroad – in its four focal areas of activity, namely, art, culture, heritage and the environment. It promotes research through its research fellowships and library resources, networks extensively with other museums, historical societies and the academia, and seeks to promote positive social change through its outreach activities with non-museum organizations and community groups. It always strives to be – and is recognized by the wider community – as a museum without walls.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <img src="images/o2.jpg" class="card-img-top" alt="..." style="height: 400px ; width: 1000px;">
+        <div class="card-body">
+          <h5 class="card-title" style="text-align: center;">The Sitting victoria</h5>
+          <p style="text-align: center;">By Ticket Bot</p>
+          <p class="card-text" style="text-align: center;">The Victoria Memorial outside Buckingham Palace sought to renovate that area of London into a grand imperial theatre — the scheme encompassed Brock’s statuary group, the architectural remodelling of the surrounding area, the creation of a grand processional road down the Mall, and the refronting of the drab and uninspiring Buckingham Palace. Imperial symbolism runs through Brock’s design, celebrating Victoria atop a seafaring island empire founded on a maritime supremacy that began in Elizabethan times. One of the most affecting parts of her funeral was the sea journey that took her cortège from Cowes to Portsmouth, with minute guns being fired by the attendant naval fleet. The hagiography around Sir Francis Drake, the Armada, and English sea power was at its height in these decades, as exemplified by the 1888 tercentenary celebrations; poems such as Henry Newbolt’s ‘Drake’s Drum’ (1896) and Alfred Noyes’s epic ‘Drake’ (1906–08); and histories such as J. A. Froude’s English Seamen in the Sixteenth Century (1895).5 The national memorial scheme was equally influenced by ideas of ‘Greater Britain’ and imperial federation with the settler colonies of Australia, Canada, South Africa, and New Zealand.6 On 10 June 1901 Joseph Chamberlain, the Secretary of State for the Colonies, sent a circular to the dominions and colonial governments inviting subscriptions. At the 1902 Colonial Conference in London, attendees agreed to contribute to the cost of the memorial; they eventually donated £115,295, nearly a third of the overall cost.7 Settler colonies contributed the bulk of this with £30,000 from Canada, £10,000 from Natal, £20,000 from Cape Colony, and £20,000 from Australia. Smaller sums were given by the Transvaal (£1000), Gambia, and Jamaica (£500). Tori Smith has rightly argued that the extent of their contribution is not fully recognized in the completed scheme, attenuated by cost and the more than two decades it took to complete.8 Nonetheless, the initial plans — both the chosen design and those which were unsuccessful — exemplify a high point in the desire to create an imperial urban space for a British audience.</p>
+          
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <img src="images/o3.jpg" class="card-img-top" alt="..." style="height: 400px ; width: 1000px;">
+        <div class="card-body">
+          <h5 class="card-title" style="text-align: center;">Entry Lions</h5>
+          <p style="text-align: center;">By Ticket Bot</p>
+          <p class="card-text" style="text-align: center;">The Victoria Gallery displays several portraits of Queen Victoria and Prince Albert, and paintings illustrating their lives, by Winterhalter, Frank Salisbury, and W. P. Frith.[20] These are copies of works of art in England. They include Victoria receiving the sacrament at her coronation in Westminster Abbey in June 1838; Victoria's wedding to Prince Albert in the Chapel Royal at St James's Palace in 1840; the christening of the Prince of Wales in St. George's Chapel, Windsor Castle, 1842; the wedding of the Prince of Wales to Alexandra of Denmark in 1863; and paintings of Victoria at the service for her Golden Jubilee at Westminster Abbey in 1887 and her Diamond Jubilee service at St Paul's Cathedral in June 1897. Queen Victoria's childhood rosewood pianoforte and her correspondence desk from Windsor Castle stand in the center of the room, having been presented to the Victoria Memorial by her son Edward VII. On the south wall hangs the oil painting by Vasily Vereshchagin of the state entry of the Prince of Wales into Jaipur in 1876.[2</p>
+       </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <img src="images/o5.jpg" class="card-img-top" alt="..." style="height: 400px ; width: 1000px;">
+        <div class="card-body">
+          <h5 class="card-title" style="text-align: center;">The Master</h5>
+          <p style="text-align: center;">By Ticket Bot</p>
+          <p class="card-text" style="text-align: center;">The executive committee surveyed the plans put forward by the architects as well as an initial model by Brock on 30 June.17 They all deployed an excess of statuary and features of the Edwardian baroque style then being used to reshape London as a grand imperial centre.18 At the Mansion House meeting Joseph Chamberlain, then Colonial Secretary, had spoken on the need for it to be ‘an Imperial and not just local tribute’, and the architects’ designs all seemed intent on enshrining Victoria’s triumphal position as an imperial figurehead.19 Robert Rowand Anderson’s plan was notable for the series of statuary additions he proposed to place on semicircular parapets outside Buckingham Palace. These would also stretch down the Mall such that, at intervals, there were to be statues of the principal heroes, monarchs, and patron saints of the nation: a public pantheon constructing a mythic version of national history. Queen Elizabeth — oft compared to Victoria in terms of the imperial success of her reign — was to be given an elaborate memorial, a statue of the Virgin Queen surrounded by the principal men of her age. At the eastern end of the Mall would be a single triumphal archway with a lofty equestrian statue of the Duke of Wellington</p>
+          
+        </div>
+      </div>
+    </div>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5718.631914925879!2d88.34031463752859!3d22.544113879173597!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a02771346ae015d%3A0xb540e4bce39763!2sVictoria%20Memorial!5e1!3m2!1sen!2sin!4v1725338015739!5m2!1sen!2sin" width="100%" height="450" style="border:0; margin-top: 20px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <!-- Footer -->
+<div style="width: 100%;">
+
+
+<section class="footer">
+  <div class="foot">
+      <div class="footer-content">
+          
+          <div class="footlinks">
+              <h4>Quick Links</h4>
+              <ul>
+                  <li><a href="/register">Register</a></li>
+                  <li><a href="/about">About Us</a></li>
+                  <li><a href="/contact">Contact Us</a></li>
+                  <li><a href="/policy">Refund Policy</a></li>
+                  <li><a href="/review">Reviews</a></li>
+              </ul>
+          </div>
+
+          <div class="footlinks">
+              <h4>Connect</h4>
+              <div class="social">
+                  <a href="#" target="_blank"><i class='bx bxl-facebook'></i></a>
+                  <a href="#" target="_blank"><i class='bx bxl-instagram' ></i></a>
+                  <a href="#" target="_blank"><i class='bx bxl-twitter' ></i></a>
+                  <a href="#" target="_blank"><i class='bx bxl-linkedin' ></i></a>
+                  <a href="#" target="_blank"><i class='bx bxl-youtube' ></i></a>
+                  <a href="#" target="_blank"><i class='bx bxl-wordpress' ></i></a>
+                  <a href="#" target="_blank"><i class='bx bxl-github'></i></a> 
+
+              </div>
+              <pre style="color: white;">
+
+                  Contact:-7205972033
+                  Email-rama@giet.edu
+                  Address-Giet University,Gunpur
+                      Pin-765022
+              </pre>
+          </div>
+          
+      </div>
+  </div>
+
+  <div class="end">
+      <p>Copyright © 2022 Mr Traveller All Rights Reserved.<br>Website developed by:Mr Devlopers,GIETU</p>
+  </div>
+</section>
+</div>
+      <script>
+      const chatbotLogo = document.getElementById('chatbot-logo');
+const chatModal = document.getElementById('chat-modal');
+const closeChat = document.getElementById('close-chat');
+const chatContainer = document.querySelector('.chat-container');
+
+// const chatContainer = document.querySelector('.chat-container');
+
+chatbotLogo.addEventListener('click', () => {
+    chatModal.style.display = 'flex'; // Show modal
+});
+
+closeChat.addEventListener('click', () => {
+    chatModal.style.display = 'none'; // Hide modal
+});
+
+
+chatModal.addEventListener('click', (e) => {
+    // Check if the clicked element is not inside the chat container
+    if (!chatContainer.contains(e.target)) {
+        chatModal.style.display = 'none'; // Hide modal
+    }
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="chatbot.css"/>
+</head>
+
+<body>
+    <div id="cbform">
+        <h3>Hello, How can i help you?</h3>
+        <button class="button" onclick="chooseLang()">
+            Choose Language
+            <div class="hoverEffect">
+              <div></div>
+            </div>
+          </button>
+          
+          <div id="languages">
+            <h3>Choose Your Language</h3>
+            <button class="button" onclick="options('English')">
+              English
+              <div class="hoverEffect">
+                <div></div>
+              </div>
+            </button>
+            <button class="button" onclick="options('Hindi')">
+              Hindi
+              <div class="hoverEffect">
+                <div></div>
+              </div>
+            </button>
+            <button class="button" onclick="options('Odia')">
+              Odia
+              <div class="hoverEffect">
+                <div></div>
+              </div>
+            </button>
+            <button class="button" onclick="options('Telugu')">
+              Telugu
+              <div class="hoverEffect">
+                <div></div>
+              </div>
+            </button>
+            <button class="button" onclick="options('Tamil')">
+              Tamil
+              <div class="hoverEffect">
+                <div></div>
+              </div>
+            </button>
+            <button class="button" onclick="options('Bengali')">
+              Bengali
+              <div class="hoverEffect">
+                <div></div>
+              </div>
+            </button>
+          </div>
+          
+        <div id="options">
+            <h3 id="change1">Continue....</h3>
+            <button onclick="window.location.href='';">Book Ticket
+                <div class="hoverEffect">
+                    <div></div>
+                  </div>
+            </button>
+            <button onclick="window.location.href='';">Cancel Ticket
+                <div class="hoverEffect">
+                    <div></div>
+                  </div>
+            </button>
+            <button onclick="window.location.href='';">View Orders
+                <div class="hoverEffect">
+                    <div></div>
+                  </div>
+            </button>
+            <button onclick="">Ticket Enquiry
+                <div class="hoverEffect">
+                    <div></div>
+                  </div>
+            </button>
+            <button onclick="others()">Others
+                <div class="hoverEffect">
+                    <div></div>
+                  </div>
+            </button>
+        </div>
+        <div id="enquiry">
+            <h3 id="change2">...</h3>
+        </div>
+        <div id="others">
+            <textarea id="ques" placeholder="Question in mind? If any."></textarea>
+            <img id="mic">
+            <h4 id="response"></h4>
+        </div>
+    </div>
+    <div id="cbdiv">
+        <img id="cbimg" onclick="chatbotClick()" src="/images/chatbot.png">
+        <script src="chatbot.js"></script>
+    </div>
+</body>
+
+</html>

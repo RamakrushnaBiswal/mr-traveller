@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
 
 // Define schema for the federated_credentials collection
 const federatedCredentialsSchema = new mongoose.Schema({
-  user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  user_id: String,
   provider: String,
   subject: String
 });

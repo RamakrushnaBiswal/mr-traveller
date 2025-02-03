@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 flex justify-center items-center h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+        <h2 class="text-2xl font-bold mb-6 text-center">Book Your Slot</h2>
+        <form action="/bookings" method="POST" class="space-y-4">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                <input type="text" id="name" name="name" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')">
+            </div>
+
+            
+
+            <div>
+                <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
+                <input type="date" id="date" name="date" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2" onchange="validateDate()">
+                <p id="date-error" class="text-red-500 text-sm mt-1 hidden">Please select a valid date in the future.</p>
+            </div>
+
+
+            <div>
+                <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                <input type="number" id="phone" name="phone" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2">
+            </div>
+
+            <div>
+                <label for="slot" class="block text-sm font-medium text-gray-700">Slot</label>
+                <select id="slot" name="slot" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                    <option value="" disabled selected>Select your slot</option>
+                    <option value="morning">Morning[8:00 AM - 11:00 PM]</option>
+                    <option value="afternoon">Afternoon[ 2:00 PM - 5:00 PM]</option>
+                    <option value="evening">Evening[ 6:00 PM - 8:00 PM]</option>
+                </select>
+            </div>
+            <!-- <div>
+                    <label for="terms" class="flex items-center">
+                        <input type="checkbox" id="terms" name="terms" class="form-checkbox h-4 w-4 text-blue-500">
+                        <span class="ml-2 text-sm text-gray-700">Add a tour guide</span>
+                    </label>
+            </div> -->
+            <div>
+                <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Book Now</button>
+            </div>
+        </form>
+    </div>
+    <script>
+    const checkbox = document.getElementById('terms');
+    const priceSpan = document.getElementById('price');
+    const ticketInput = document.getElementById('tickets');
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.querySelector('form');
+        const phoneInput = document.getElementById('phone');
+        const dateInput = document.getElementById('date');
+        const dateError = document.getElementById('date-error');
+        const phonePattern = /^\d{10}$/;
+
+        function validateDate() {
+            const selectedDate = new Date(dateInput.value);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0); // Set time to midnight for comparison
+
+            if (selectedDate <= today) {
+                dateError.classList.remove('hidden');
+                return false;
+            } else {
+                dateError.classList.add('hidden');
+                return true;
+            }
+        }
+
+        function validatePhoneNumber() {
+            const phoneValue = phoneInput.value;
+            return phonePattern.test(phoneValue);
+        }
+
+        form.addEventListener('submit', (event) => {
+            let isValid = true;
+
+            // Validate date
+            if (!validateDate()) {
+                isValid = false;
+            }
+
+            // Validate phone number
+            if (!validatePhoneNumber()) {
+                phoneInput.setCustomValidity('Please enter a valid 10-digit phone number.');
+                phoneInput.reportValidity();
+                isValid = false;
+            } else {
+                phoneInput.setCustomValidity('');
+            }
+
+            // Prevent form submission if not valid
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+
+        // Add real-time validation for phone number
+        phoneInput.addEventListener('input', () => {
+            if (!validatePhoneNumber()) {
+                phoneInput.setCustomValidity('Please enter a valid 10-digit phone number.');
+            } else {
+                phoneInput.setCustomValidity('');
+            }
+        });
+    });
+    ticketInput.addEventListener('input', function () {
+        priceSpan.textContent = `${basePrice *(ticketInput.value)}/-`;
+    });
+
+    let basePrice = 50;
+function validateDate() {
+    const dateInput = document.getElementById('date');
+    const dateError = document.getElementById('date-error');
+    const selectedDate = new Date(dateInput.value);
+    const today = new Date();
+    
+    // Clear the time part from today's date for accurate comparison
+    today.setHours(0, 0, 0, 0);
+
+    if (selectedDate < today) {
+        dateError.classList.remove('hidden');
+        dateInput.value = ''; // Clear the invalid input
+    } else {
+        dateError.classList.add('hidden');
+    }
+}
+
+
+</script>
+</body>
+</html>

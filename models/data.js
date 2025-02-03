@@ -33,13 +33,17 @@ const dataSchema=new Schema({
     },
     destination:{
         type:String,
-        enum:['kashmir','puri','siridi','varanasi','mumbai','sikkim','tirupati','similipal'],
+        enum:['National Museum','Victorial Museum','Indian Museum','Government Museum','Calio Museum','Sikkim Museum','Dr Bhau Jii','Salar Museum'],
         required:true
     },
     package:{
         type:String,
         enum:['bronze','silver','gold','platinum'],
         required:true
+    },
+    resid: {
+        type: String,
+        required: true
     }   
 });
 const Data=mongoose.model('registereduser',dataSchema);

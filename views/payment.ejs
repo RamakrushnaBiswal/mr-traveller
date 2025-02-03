@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Gateway</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f2f5;
+        }
+        /* From Uiverse.io by Randdose */ 
+.button {
+  all: unset;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 0.6em 2em;
+  border: mediumspringgreen solid 0.15em;
+  border-radius: 0.25em;
+  color: mediumspringgreen;
+  font-size: 1.5em;
+  font-weight: 600;
+  cursor: pointer;
+  overflow: hidden;
+  transition: border 300ms, color 300ms;
+  user-select: none;
+  justify-content: center;
+}
+
+
+
+.button:hover {
+  color: #212121;
+}
+
+.button:active {
+  border-color: teal;
+}
+
+.button::after, .button::before {
+  content: "";
+  position: absolute;
+  width: 9em;
+  aspect-ratio: 1;
+  background: mediumspringgreen;
+  opacity: 50%;
+  border-radius: 50%;
+  transition: transform 500ms, background 300ms;
+}
+
+.button::before {
+  left: 0;
+  transform: translateX(-8em);
+}
+
+.button::after {
+  right: 0;
+  transform: translateX(8em);
+}
+
+.button:hover:before {
+  transform: translateX(-1em);
+}
+
+.button:hover:after {
+  transform: translateX(1em);
+}
+
+.paybutton {
+    width: 200px;
+    display: flex;
+    margin-left: 100px;
+}
+
+.button:active:before,
+.button:active:after {
+  background: teal;
+}
+        .payment-container {
+            width: 100%;
+            max-width: 400px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .payment-form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .payment-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+        .payment-form input, .payment-form select {
+            width: 100%;
+            height: 30px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #333;
+        }
+        .payment-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .payment-form button:hover {
+            background-color: #218838;
+        }
+        .error {
+            color: red;
+            margin-top: -10px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        .payment-methods {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .payment-methods h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .payment-methods label {
+            display: inline-block;
+            margin-right: 15px;
+            font-weight: bold;
+            color: #555;
+        }
+        .payment-methods input[type="radio"] {
+            margin-right: 8px;
+            height: 15px;
+
+        }
+        .total-amount {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+.payment-form label[for="tourGuide"] {
+    display: flex;
+    align-items: center;
+}
+
+.payment-form input[type="checkbox"] {
+    margin-right: 110px;
+    height: 15px; 
+}
+.discount {
+    color: #28a745;
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="payment-container">
+        <div class="payment-form">
+            <h2>Checkout</h2>
+            <form id="paymentForm">
+        
+                <label for="tickets">Number of Tickets (₹50 each):</label>
+                <select id="tickets" name="tickets" required>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+                <h4 class="discount">10% discount on the purchase of 5 or more tickets</h4>
+                <label for="tourGuide">
+                     Tour Guide (₹50 extra)
+                    <input type="checkbox" id="tourGuide" name="tourGuide">
+                </label>
+                
+
+                <div class="total-amount" id="totalAmount">
+                    <span id="originalAmountContainer">
+                        <span id="originalAmountText">Total Amount:</span>
+                        <span id="originalAmount" style="text-decoration: line-through; color: #888;">₹50</span>
+                    </span>
+                    <span id="discountedAmountContainer">
+                        <span id="discountedAmountText">Discounted Amount:</span>
+                        <span id="discountedAmount" style="color: #28a745; margin-left: 10px;">₹45</span>
+                    </span>
+                </div>
+                
+                
+                <div class="paybutton">
+                <button class="button" type="submit">
+                    <p>Submit</p>
+                  </button>
+                  </div>
+            </form>
+
+            <div class="payment-methods" id="paymentMethods">
+                <h3>Select Payment Method</h3>
+                <label><input type="radio" name="paymentMethod" value="bank" required> Bank Number</label>
+                <label><input type="radio" name="paymentMethod" value="qr"> QR Code</label>
+                <label><input type="radio" name="paymentMethod" value="gpay"> Google Pay</label>
+                <label><input type="radio" name="paymentMethod" value="phonepe"> PhonePe</label>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get the discounted amount
+// const discountedAmount = document.getElementById('discountedAmount').textContent;
+
+// Store it in localStorage or sessionStorage
+  document.addEventListener('DOMContentLoaded', function() {
+    const paymentForm = document.getElementById('paymentForm');
+    const paymentMethods = document.getElementById('paymentMethods');
+    const ticketsSelect = document.getElementById('tickets');
+    const tourGuideCheckbox = document.getElementById('tourGuide');
+    const originalAmountSpan = document.getElementById('originalAmount');
+    const discountedAmountSpan = document.getElementById('discountedAmount');
+
+    const TICKET_PRICE = 50;
+    const TOUR_GUIDE_PRICE = 50;
+
+    // Function to calculate the total amount including discount and additional charges
+    function calculateTotal() {
+        const numberOfTickets = parseInt(ticketsSelect.value);
+        let totalAmount = numberOfTickets * TICKET_PRICE;
+        let discountedAmount = totalAmount;
+
+        // Calculate discount if 5 or more tickets are selected
+        if (numberOfTickets >= 5) {
+            const discount = totalAmount * 0.1; // 10% discount
+            discountedAmount -= discount; // Subtract discount from total amount
+        }
+
+        // Add additional charge for tour guide if selected
+        if (tourGuideCheckbox.checked) {
+            discountedAmount += TOUR_GUIDE_PRICE;
+        }
+
+        // Update the total amount display
+        originalAmountSpan.innerText = `₹${totalAmount}`;
+        discountedAmountSpan.innerText = `₹${discountedAmount}`;
+    }
+
+    // Event listeners to trigger calculation when ticket number or tour guide option changes
+    ticketsSelect.addEventListener('change', calculateTotal);
+    tourGuideCheckbox.addEventListener('change', calculateTotal);
+
+    // Initialize total amount on page load
+    calculateTotal();
+
+    // Handle form submission
+    paymentForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Ensure payment methods are displayed on form submission
+        paymentMethods.style.display = 'block';
+
+        // Logic for handling specific payment method selection and redirection
+        const selectedPaymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
+        if (selectedPaymentMethod && selectedPaymentMethod.value === 'qr') {
+            const numberOfTickets = parseInt(ticketsSelect.value);
+            let totalAmount = numberOfTickets * TICKET_PRICE;
+
+            if (numberOfTickets >= 5) {
+                const discount = totalAmount * 0.1;
+                totalAmount -= discount;
+            }
+
+            if (tourGuideCheckbox.checked) {
+                totalAmount += TOUR_GUIDE_PRICE;
+            }
+
+
+            // Redirect to QR code payment page with total amount and number of tickets as query parameters
+            window.location.href = `http://localhost:3000/qrpay`;
+        }
+    });
+});
+
+    </script>
+    <script src="payment.js"></script>
+</html>

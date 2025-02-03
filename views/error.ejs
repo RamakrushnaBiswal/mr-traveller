@@ -1,3 +1,40 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Error Page</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .error-container {
+      margin-top: 100px;
+      text-align: center;
+    }
+    .error-code {
+      font-size: 10rem;
+      color: #dc3545;
+    }
+    .error-message {
+      font-size: 2rem;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container error-container">
+    <div class="row">
+      <div class="col">
+        <div class="error-code"><h2><%= error.status %></h2></div>
+        <div class="error-message"><h1><%= message %></h1></div>
+        <pre class="mt-3"><%= error.stack %></pre>
+        <a href="/" class="btn btn-danger mt-3">Go Back</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
