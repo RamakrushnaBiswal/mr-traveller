@@ -8,6 +8,7 @@ CORS(app)  # This allows all domains. You can configure it more strictly if need
 # Sample dataset of questions and answers
 qa_dataset = {
     "Hello, hi,":"Hello Sir/Madam, How can I help you?",
+    "I love you":"it is not a question of museum",
     "Who are you and your work?": "I am an AI model created to assist with your queries.",
     "What is the name of the museum?":"The name of the museum is Victorial Museum",
     "Details about the victorial museum?":"The Victoria Memorial is a large marble monument on the Maidan in Central Kolkata, having its entrance on the Queen's Way. It was built between 1906 and 1921 by the Government of India. It is dedicated to the memory of Queen Victoria, the Empress of India from 1876 to 1901. It is the largest monument to a monarch anywhere in the world. It stands at 64 acres of gardens and is now a museum under the control of the Ministry of Culture, Government of India. Possessing prominent features of the Indo-Saracenic architecture, it has evolved into one of the most popular attractions in the city.",

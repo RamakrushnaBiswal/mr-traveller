@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Bookings</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2>Bookings</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Date</th>
+                <th>Shift</th>
+            </tr>
+            </thead>
+            <tbody>
+                <% if (bookings.length > 0) { %>
+                    <% for (let booking of bookings) { %>
+                        <tr>
+                            <td><%= booking.name.name %></td>
+                            <td><%= booking.phone %></td>
+                            <td><%= booking.date.toISOString().split("T")[0] %></td> <!-- Format Date -->
+                            <td><%= booking.slot %></td>            
+                        </tr>
+                    <% } %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="4" class="text-center">No bookings found</td>
+                    </tr>
+                <% } %>
+                
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

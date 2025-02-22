@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 var ensureLogIn = require("connect-ensure-login").ensureLoggedIn;
 const Data = require("../models/data");
-const Bookings = require("../models/booking");
+const {Bookings} = require("../models/booking");
 
 var ensureLoggedIn = ensureLogIn();
 
@@ -24,7 +24,7 @@ router.get("/about", (req, res) => {
   res.render("about");
 });
 router.get("/museum", (req, res) => {
-  res.render("museum");
+  res.render("museum",{ user: req.user });
 });
 router.get("/abtmuseum", (req, res) => {
   res.render("aboutmuseum");
@@ -41,23 +41,36 @@ router.get("/payment", (req, res) => {
 router.get("/qrpay", (req, res) => {
   res.render("qr_payment", { csrfToken: req.csrfToken() });
 });
-router.get("/bookings", (req, res) => {
-  res.render("bookings", { csrfToken: req.csrfToken() });
+router.get("/bookings/:id", ensureLoggedIn, async (req, res) => {
+  try {
+    const userId = req.params.id;  // Correctly access `id`
+    console.log("Fetching bookings for user:", userId);
+    res.render("bookings", { csrfToken: req.csrfToken(), user: userId });
+
+  } catch (error) {
+    console.error("Error fetching bookings:", error);
+    res.status(500).send("Internal Server Error");
+  }
 });
+
 
 router.post("/bookings", ensureLoggedIn, async (req, res) => {
   try {
-    const data = req.body;
-    const booking = new Bookings(data);
+    const { name, date, phone, slot } = req.body;
+    const userId = req.user._id; // Get logged-in user ID
+
+    const booking = new Bookings({ userId, name, date, phone, slot });
     await booking.save();
-    console.log("Booking saved successfully", booking);
+
+    console.log("Booking saved successfully:", booking);
     res.redirect("/payment");
-    // res.status(201).json({ message: 'Ticket booked successfully' });
+
   } catch (error) {
-    console.error("Error saving ticket", error);
-    // res.status(500).json({ message: 'Error saving ticket', error: error.message });
+    console.error("Error saving booking:", error);
+    res.status(500).send("Error saving booking");
   }
 });
+
 
 router.get("/locations", ensureLoggedIn, (req, res) => {
   res.render("location");
@@ -104,4 +117,19 @@ router.get("/viewbookings/:id", ensureLoggedIn, async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+router.get("/museumbookings/:id", ensureLoggedIn, async (req, res) => {
+  try {
+    const name = req.params.id;
+    const bookings = await Bookings.find({ name }).populate("name","name").exec();
+    console.log(bookings);
+    
+    res.render("museumbookings", { bookings });
+
+  } catch (error) {
+    console.error("Error fetching museum bookings:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+
 module.exports = router;

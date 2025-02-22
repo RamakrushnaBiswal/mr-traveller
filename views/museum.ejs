@@ -205,7 +205,7 @@ h3, h4 {
                         <a href="/">Home</a>
                         <a href="/points">Points</a>
                         <a href="/mlocation">Tour</a>
-                        <a href="/bookings">Bookings</a>
+                        <a href="/museumbookings/<%= user.id %>">Bookings</a>
                         <a href="/abtmuseum">About</a>
                     </li>
                 </ul>
@@ -269,7 +269,7 @@ h3, h4 {
                       
                     <div id="options">
                         <h3 id="change1">Continue....</h3>
-                        <button class="cbutton" onclick="window.location.href='/bookings';">Book Ticket
+                        <button class="cbutton" onclick="window.location.href='/bookings/<%= user.id %>'">Book Ticket
                             <div class="hoverEffect">
                                 <div></div>
                               </div>
@@ -279,7 +279,7 @@ h3, h4 {
                                 <div></div>
                               </div>
                         </button>
-                        <button class="cbutton" onclick="window.location.href='/viewbookings/66d5c5c7f4d6cac380ba7502';">View Orders
+                        <button class="cbutton" onclick="window.location.href='/museumbookings/<%= user.id %>'">View Orders
                             <div class="hoverEffect">
                                 <div></div>
                               </div>
