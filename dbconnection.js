@@ -7,7 +7,7 @@ async function main() {
 }
 main()
     .then(() => {
-        console.log('database connected')
+        console.log('Database connected ✅')
     })
     .catch((err) => {
         console.log(err)

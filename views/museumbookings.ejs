@@ -18,6 +18,7 @@
                 <th>Phone</th>
                 <th>Date</th>
                 <th>Shift</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -27,12 +28,18 @@
                             <td><%= booking.name.name %></td>
                             <td><%= booking.phone %></td>
                             <td><%= booking.date.toISOString().split("T")[0] %></td> <!-- Format Date -->
-                            <td><%= booking.slot %></td>            
+                            <td><%= booking.slot %></td>
+                            <td>
+                                <form action="/deletebooking/<%= booking._id %>" method="POST">
+                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </td>          
                         </tr>
                     <% } %>
                 <% } else { %>
                     <tr>
-                        <td colspan="4" class="text-center">No bookings found</td>
+                        <td colspan="5" class="text-center">No bookings found</td>
                     </tr>
                 <% } %>
                 
@@ -40,6 +47,5 @@
         </table>
     </div>
 </div>
-
 </body>
 </html>

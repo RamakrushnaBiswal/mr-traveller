@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Processing Payment</title>
+</head>
+<body>
+  <h2>Processing your payment...</h2>
+
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script>
+    const options = {
+      key: "<%= key %>", // Razorpay Key ID
+      amount: "<%= amount %>",
+      currency: "INR",
+      name: "Ticket Booking",
+      description: "Booking for <%= tickets %> tickets <%= tourGuide ? 'with Tour Guide' : '' %>",
+      order_id: "<%= orderId %>",
+      handler: function (response) {
+        // You can optionally POST response.razorpay_payment_id to your backend
+        window.location.href = "/payment-success"; // Redirect on success
+      },
+      theme: {
+        color: "#3399cc"
+      }
+    };
+
+    const rzp1 = new Razorpay(options);
+    rzp1.open();
+  </script>
+</body>
+</html>

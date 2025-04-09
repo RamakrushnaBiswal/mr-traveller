@@ -1,4 +1,5 @@
 const express = require("express");
+const mongoose =require("mongoose")
 const router = express.Router();
 var ensureLogIn = require("connect-ensure-login").ensureLoggedIn;
 const Data = require("../models/data");
@@ -24,8 +25,12 @@ router.get("/about", (req, res) => {
   res.render("about");
 });
 router.get("/museum", (req, res) => {
-  res.render("museum",{ user: req.user });
+  if (!req.user) {
+    return res.redirect("/login"); // or show a guest view
+  }
+  res.render("museum", { user: req.user });
 });
+
 router.get("/abtmuseum", (req, res) => {
   res.render("aboutmuseum");
 });
@@ -35,12 +40,18 @@ router.get("/points", (req, res) => {
 router.get("/mlocation", (req, res) => {
   res.render("mlocation");
 });
+router.get("/contact", (req, res) => {
+  res.render("contact");
+});
 router.get("/payment", (req, res) => {
-  res.render("payment", { csrfToken: req.csrfToken() });
+  res.render("payment");
 });
-router.get("/qrpay", (req, res) => {
-  res.render("qr_payment", { csrfToken: req.csrfToken() });
+
+router.get('/payment-success', (req, res) => {
+  res.render('payment-success'); // Or show confirmation page
 });
+
+
 router.get("/bookings/:id", ensureLoggedIn, async (req, res) => {
   try {
     const userId = req.params.id;  // Correctly access `id`
@@ -117,19 +128,53 @@ router.get("/viewbookings/:id", ensureLoggedIn, async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+
+// ✅ Fetch bookings based on user ID
 router.get("/museumbookings/:id", ensureLoggedIn, async (req, res) => {
   try {
-    const name = req.params.id;
-    const bookings = await Bookings.find({ name }).populate("name","name").exec();
-    console.log(bookings);
-    
-    res.render("museumbookings", { bookings });
+    const userId = req.params.id;
 
+    // Ensure userId is a valid ObjectId
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).send("Invalid user ID");
+    }
+
+    // Query bookings where 'name' matches the user's ObjectId
+    const bookings = await Bookings.find({ name: userId }).populate("name", "name").exec();
+    
+    console.log(bookings); // Debugging
+
+    res.render("museumbookings", { bookings });
   } catch (error) {
     console.error("Error fetching museum bookings:", error);
     res.status(500).send("Internal Server Error");
   }
 });
+
+// ✅ Delete a booking
+router.post("/deletebooking/:id", ensureLoggedIn, async (req, res) => {
+  try {
+    const bookingId = req.params.id;
+
+    // Validate bookingId as a proper ObjectId
+    if (!mongoose.Types.ObjectId.isValid(bookingId)) {
+      return res.status(400).json({ error: "Invalid booking ID" });
+    }
+
+    // Find and delete the booking
+    const deletedBooking = await Bookings.findByIdAndDelete(bookingId);
+    if (!deletedBooking) {
+      return res.status(404).json({ error: "Booking not found" });
+    }
+
+    res.redirect("/museumbookings/" + req.user.id);
+  } catch (error) {
+    console.error("Error deleting booking:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+
 
 
 module.exports = router;

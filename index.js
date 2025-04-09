@@ -22,8 +22,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, 'views'));
-
 app.locals.pluralize = require('pluralize');
+
 app.use(session({
     secret: process.env['SESSION_SECRET'],
     resave: false, // don't save session if unmodified
@@ -48,12 +48,11 @@ app.use(session({
     next();
   });
 
-
 //routes
 app.use("/", homeRouter);
 app.use("/", authRouter);
 app.use("/", registerRouter);
-
+app.use("/", require("./routes/payment"));
 
 
 

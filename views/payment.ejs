@@ -176,131 +176,90 @@
     <div class="payment-container">
         <div class="payment-form">
             <h2>Checkout</h2>
-            <form id="paymentForm">
-        
+            <form id="paymentForm" method="POST" action="/create-order">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
                 <label for="tickets">Number of Tickets (₹50 each):</label>
                 <select id="tickets" name="tickets" required>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
                 </select>
+              
                 <h4 class="discount">10% discount on the purchase of 5 or more tickets</h4>
+              
                 <label for="tourGuide">
-                     Tour Guide (₹50 extra)
-                    <input type="checkbox" id="tourGuide" name="tourGuide">
+                  Tour Guide (₹50 extra)
+                  <input type="checkbox" id="tourGuide" name="tourGuide">
                 </label>
-                
-
+              
                 <div class="total-amount" id="totalAmount">
-                    <span id="originalAmountContainer">
-                        <span id="originalAmountText">Total Amount:</span>
-                        <span id="originalAmount" style="text-decoration: line-through; color: #888;">₹50</span>
-                    </span>
-                    <span id="discountedAmountContainer">
-                        <span id="discountedAmountText">Discounted Amount:</span>
-                        <span id="discountedAmount" style="color: #28a745; margin-left: 10px;">₹45</span>
-                    </span>
+                  <span id="originalAmountContainer">
+                    <span id="originalAmountText">Total Amount:</span>
+                    <span id="originalAmount" style="text-decoration: line-through; color: #888;">₹50</span>
+                  </span>
+                  <span id="discountedAmountContainer">
+                    <span id="discountedAmountText">Discounted Amount:</span>
+                    <span id="discountedAmount" style="color: #28a745; margin-left: 10px;">₹45</span>
+                  </span>
                 </div>
-                
-                
-                <div class="paybutton">
+              
+                <!-- Hidden input to send final amount to backend -->
+                <input type="hidden" id="finalAmount" name="finalAmount" value="">
+              
                 <button class="button" type="submit">
-                    <p>Submit</p>
-                  </button>
-                  </div>
-            </form>
-
-            <div class="payment-methods" id="paymentMethods">
-                <h3>Select Payment Method</h3>
-                <label><input type="radio" name="paymentMethod" value="bank" required> Bank Number</label>
-                <label><input type="radio" name="paymentMethod" value="qr"> QR Code</label>
-                <label><input type="radio" name="paymentMethod" value="gpay"> Google Pay</label>
-                <label><input type="radio" name="paymentMethod" value="phonepe"> PhonePe</label>
-            </div>
+                  <p>Submit</p>
+                </button>
+              </form>
         </div>
     </div>
 
     <script>
-        // Get the discounted amount
-// const discountedAmount = document.getElementById('discountedAmount').textContent;
-
 // Store it in localStorage or sessionStorage
-  document.addEventListener('DOMContentLoaded', function() {
-    const paymentForm = document.getElementById('paymentForm');
-    const paymentMethods = document.getElementById('paymentMethods');
-    const ticketsSelect = document.getElementById('tickets');
-    const tourGuideCheckbox = document.getElementById('tourGuide');
-    const originalAmountSpan = document.getElementById('originalAmount');
-    const discountedAmountSpan = document.getElementById('discountedAmount');
+const ticketsSelect = document.getElementById("tickets");
+  const tourGuideCheckbox = document.getElementById("tourGuide");
+  const originalAmountElem = document.getElementById("originalAmount");
+  const discountedAmountElem = document.getElementById("discountedAmount");
+  const finalAmountInput = document.getElementById("finalAmount");
 
-    const TICKET_PRICE = 50;
-    const TOUR_GUIDE_PRICE = 50;
+  function updateAmount() {
+    const ticketCount = parseInt(ticketsSelect.value);
+    const guideFee = tourGuideCheckbox.checked ? 50 : 0;
+    const baseAmount = ticketCount * 50;
 
-    // Function to calculate the total amount including discount and additional charges
-    function calculateTotal() {
-        const numberOfTickets = parseInt(ticketsSelect.value);
-        let totalAmount = numberOfTickets * TICKET_PRICE;
-        let discountedAmount = totalAmount;
+    let finalAmount = baseAmount;
+    let isDiscounted = false;
 
-        // Calculate discount if 5 or more tickets are selected
-        if (numberOfTickets >= 5) {
-            const discount = totalAmount * 0.1; // 10% discount
-            discountedAmount -= discount; // Subtract discount from total amount
-        }
-
-        // Add additional charge for tour guide if selected
-        if (tourGuideCheckbox.checked) {
-            discountedAmount += TOUR_GUIDE_PRICE;
-        }
-
-        // Update the total amount display
-        originalAmountSpan.innerText = `₹${totalAmount}`;
-        discountedAmountSpan.innerText = `₹${discountedAmount}`;
+    if (ticketCount >= 5) {
+      finalAmount = baseAmount * 0.9; // 10% discount
+      isDiscounted = true;
     }
 
-    // Event listeners to trigger calculation when ticket number or tour guide option changes
-    ticketsSelect.addEventListener('change', calculateTotal);
-    tourGuideCheckbox.addEventListener('change', calculateTotal);
+    finalAmount += guideFee;
 
-    // Initialize total amount on page load
-    calculateTotal();
+    // Update display
+    originalAmountElem.textContent = "₹" + (baseAmount + guideFee);
+    discountedAmountElem.textContent = "₹" + finalAmount;
 
-    // Handle form submission
-    paymentForm.addEventListener('submit', function(event) {
-        event.preventDefault();
+    document.getElementById("originalAmountContainer").style.display = isDiscounted ? "inline" : "none";
+    document.getElementById("discountedAmountContainer").style.display = "inline";
 
-        // Ensure payment methods are displayed on form submission
-        paymentMethods.style.display = 'block';
+    // Set the value to send to the server
+    finalAmountInput.value = Math.round(finalAmount);
+  }
 
-        // Logic for handling specific payment method selection and redirection
-        const selectedPaymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
-        if (selectedPaymentMethod && selectedPaymentMethod.value === 'qr') {
-            const numberOfTickets = parseInt(ticketsSelect.value);
-            let totalAmount = numberOfTickets * TICKET_PRICE;
+  // Listen for changes
+  ticketsSelect.addEventListener("change", updateAmount);
+  tourGuideCheckbox.addEventListener("change", updateAmount);
 
-            if (numberOfTickets >= 5) {
-                const discount = totalAmount * 0.1;
-                totalAmount -= discount;
-            }
-
-            if (tourGuideCheckbox.checked) {
-                totalAmount += TOUR_GUIDE_PRICE;
-            }
-
-
-            // Redirect to QR code payment page with total amount and number of tickets as query parameters
-            window.location.href = `http://localhost:3000/qrpay`;
-        }
-    });
-});
+  // Trigger once on load
+  updateAmount();
 
     </script>
-    <script src="payment.js"></script>
 </html>
