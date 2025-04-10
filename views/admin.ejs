@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<style>
+    #usersModal {
+        transition: opacity 0.2s ease-in-out;
+    }
+</style>
+
+<body class="bg-gray-100 min-h-screen px-4 py-6">
+    <div class="max-w-5xl mx-auto">
+        <h1 class="text-3xl font-bold mb-6 text-center text-blue-700">Admin Dashboard</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-white">
+            <div class="bg-green-500 p-6 rounded-xl shadow-md text-center">
+                <h2 class="text-2xl font-semibold">Total Users</h2>
+                <p class="text-4xl mt-2">
+                    <%= totalUsers %>
+                </p>
+            </div>
+            <div class="bg-purple-500 p-6 rounded-xl shadow-md text-center">
+                <h2 class="text-2xl font-semibold">Museum Tickets</h2>
+                <p class="text-4xl mt-2">
+                    <%= totalBookings %>
+                </p>
+            </div>
+            <div class="bg-orange-500 p-6 rounded-xl shadow-md text-center">
+                <h2 class="text-2xl font-semibold">Tour Tickets</h2>
+                <p class="text-4xl mt-2">
+                    <%= totalTours %>
+                </p>
+            </div>
+        </div>
+        <div class="max-w-5xl mx-auto">
+            <h1 class="text-3xl font-bold mb-6 text-center text-blue-700 mt-4">Details</h1>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-white">
+                <button class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded"
+                    onclick="document.getElementById('usersModal').classList.remove('hidden')">
+                    View All Users
+                </button>
+                <button class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded"
+                    onclick="document.getElementById('museumModal').classList.remove('hidden')">
+                    View Museum Tickets
+                </button>
+                <button class="bg-amber-600 hover:bg-amber-700 text-white font-semibold py-2 px-4 rounded"
+                    onclick="openModal('tourModal')">
+                    View Tour Tickets
+                </button>
+            </div>
+            <div class="p-4">
+                <div class="bg-white rounded-xl shadow-md p-6 max-w-4xl mx-auto">
+                    <h2 class="text-xl font-bold mb-4 text-center">Analytics Overview</h2>
+                    <canvas id="analyticsChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Museum Tickets Modal -->
+        <div id="museumModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-50 flex items-center justify-center">
+            <div class="bg-white p-6 rounded-xl w-[95%] max-w-3xl max-h-[80vh] overflow-y-auto shadow-lg">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-bold">Museum Ticket Bookings</h2>
+                    <button class="text-gray-500 hover:text-gray-700 text-xl"
+                        onclick="document.getElementById('museumModal').classList.add('hidden')">
+                        ✕
+                    </button>
+                </div>
+
+                <% if (bookings && bookings.length> 0) { %>
+                    <ul class="divide-y divide-gray-200">
+                        <% bookings.forEach(booking=> { %>
+                            <li class="py-3">
+                                <p><span class="font-semibold">User:</span>
+                                    <%= booking.name?.name || "N/A" %>
+                                </p>
+                                <p><span class="font-semibold">Phone:</span>
+                                    <%= booking.phone %>
+                                </p>
+                                <p><span class="font-semibold">Date:</span>
+                                    <%= new Date(booking.date).toLocaleDateString() %>
+                                </p>
+                                <p><span class="font-semibold">Slot:</span>
+                                    <%= booking.slot %>
+                                </p>
+                            </li>
+                            <% }) %>
+                    </ul>
+                    <% } else { %>
+                        <p>No museum bookings available.</p>
+                        <% } %>
+            </div>
+        </div>
+
+        <!-- Tour Tickets Modal -->
+        <div id="tourModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-50 flex items-center justify-center">
+            <div class="bg-white p-6 rounded-xl w-[95%] max-w-4xl max-h-[80vh] overflow-y-auto shadow-lg">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-bold">Tour Ticket Bookings</h2>
+                    <button class="text-gray-500 hover:text-gray-700 text-xl" onclick="closeModal('tourModal')">
+                        ✕
+                    </button>
+                </div>
+
+                <% if (tours && tours.length> 0) { %>
+                    <ul class="divide-y divide-gray-200">
+                        <% tours.forEach(tour=> { %>
+                            <li class="py-3">
+                                <p><span class="font-semibold">Name:</span>
+                                    <%= tour.name %>
+                                </p>
+                                <p><span class="font-semibold">Email:</span>
+                                    <%= tour.email %>
+                                </p>
+                                <p><span class="font-semibold">Phone:</span>
+                                    <%= tour.phone %>
+                                </p>
+                                <p><span class="font-semibold">Destination:</span>
+                                    <%= tour.destination %>
+                                </p>
+                                <p><span class="font-semibold">Departure:</span>
+                                    <%= tour.departuredate %>
+                                </p>
+                                <p><span class="font-semibold">Return:</span>
+                                    <%= tour.returndate %>
+                                </p>
+                                <p><span class="font-semibold">Package:</span>
+                                    <%= tour.package %>
+                                </p>
+                            </li>
+                            <% }) %>
+                    </ul>
+                    <% } else { %>
+                        <p>No tour bookings available.</p>
+                        <% } %>
+            </div>
+        </div>
+        <script>
+            const ctx = document.getElementById('analyticsChart').getContext('2d');
+            const analyticsChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Users', 'Museum Bookings', 'Tour Bookings'],
+                    datasets: [{
+                        label: 'Total Count',
+                        data: [<%= userCount %>, <%= bookingCount %>, <%= tourCount %>],
+                        backgroundColor: [
+                            'rgba(59, 130, 246, 0.6)',  // blue
+                            'rgba(34, 197, 94, 0.6)',   // green
+                            'rgba(139, 92, 246, 0.6)'   // purple
+                        ],
+                        borderColor: [
+                            'rgba(59, 130, 246, 1)',
+                            'rgba(34, 197, 94, 1)',
+                            'rgba(139, 92, 246, 1)'
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            enabled: true
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    }
+                }
+            });
+        </script>
+
+</body>
+<!-- User List Modal -->
+<div id="usersModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-50 flex items-center justify-center">
+    <div class="bg-white p-6 rounded-xl w-[90%] max-w-2xl max-h-[80vh] overflow-y-auto shadow-lg">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-bold text-amber-600">All Users</h2>
+            <button class="text-gray-500 hover:text-gray-700"
+                onclick="document.getElementById('usersModal').classList.add('hidden')">
+                ✕
+            </button>
+        </div>
+
+        <% if (users && users.length> 0) { %>
+            <ul class="space-y-2">
+                <% users.forEach(user=> { %>
+                    <li class="border-b py-2">
+                        <p class="font-semibold">
+                            <%= user.name || "Unnamed User" %>
+                        </p>
+                    </li>
+                    <% }) %>
+            </ul>
+            <% } else { %>
+                <p>No users found.</p>
+                <% } %>
+    </div>
+</div>
+<script>
+    function openModal(id) {
+        document.getElementById(id).classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(id) {
+        document.getElementById(id).classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+</script>
+
+</html>

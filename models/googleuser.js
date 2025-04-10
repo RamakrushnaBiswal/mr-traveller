@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 
 // Define schema for the users collection
 const userSchema = new mongoose.Schema({
-  name: String
+  name: String,
+  // email: String  // Add this field
 });
 
 // Define schema for the federated_credentials collection

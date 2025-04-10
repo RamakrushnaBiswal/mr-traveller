@@ -53,7 +53,7 @@ app.use("/", homeRouter);
 app.use("/", authRouter);
 app.use("/", registerRouter);
 app.use("/", require("./routes/payment"));
-
+app.use("/", require("./routes/adminRoutes"));
 
 
 //error handlers

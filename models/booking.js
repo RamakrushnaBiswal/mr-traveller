@@ -27,7 +27,7 @@ const Bookings = mongoose.model('Booking', bookingSchema);
 
 const getBookingsByUserId = async (name) => {
     try {
-        const bookings = await Booking.find({ user: name }).populate('user', 'name'); // Populates user details
+        const bookings = await Bookings.find({ user: name }).populate('user', 'name'); // Populates user details
         return bookings;
     } catch (error) {
         throw new Error(error.message);
